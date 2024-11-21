@@ -18,3 +18,6 @@ Masuk config:
 - exit --> buat balik ke config
 - interface fa1/0 --> masuk conf-if
 - ip access-group 178 out --> in atau out tergantung inbound/outbound
+
+
+HALOOOOOO
