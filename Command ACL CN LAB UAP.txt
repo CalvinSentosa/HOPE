@@ -1,0 +1,20 @@
+Pilih router yang mau diblok traffic-nya
+Exit mentok
+
+Masuk config:
+- en
+- conf t
+
+- ip access-list extended 174 --> extended/standard terus nomernya berapa
+- deny ip host 192.168.10.2 host 192.168.30.3 --> yang mau diblok itu
+- permit ip any any --> yang lainnya bebas
+- exit --> buat balik ke config
+- interface fa0/0 --> masuk conf-if
+- ip access-group 174 in --> in atau out tergantung inbound/outbound
+
+- ip access-list extended 178 --> extended/standard terus nomernya berapa
+- deny ip host 192.168.20.2 host 192.168.50.3 --> yang mau diblok itu
+- permit ip any any --> yang lainnya bebas
+- exit --> buat balik ke config
+- interface fa1/0 --> masuk conf-if
+- ip access-group 178 out --> in atau out tergantung inbound/outbound
