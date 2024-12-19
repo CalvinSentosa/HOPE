@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:project_android_studio/Login/login_page.dart';
-import 'package:project_android_studio/Services/auth_services.dart';
-import 'package:project_android_studio/Services/globals.dart';
+import 'package:HOPE/Login/login_page.dart';
+import 'package:HOPE/Services/auth_services.dart';
+import 'package:HOPE/Services/globals.dart';
 import 'package:http/http.dart' as http;
 
 // ignore: must_be_immutable

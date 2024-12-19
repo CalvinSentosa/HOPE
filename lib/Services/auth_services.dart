@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:project_android_studio/Services/globals.dart';
+import 'package:HOPE/Services/globals.dart';
 import 'package:http/http.dart' as http;
 
 class AuthServices {
