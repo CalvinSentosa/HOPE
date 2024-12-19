@@ -1,12 +1,11 @@
-// ignore_for_file: must_be_immutable
-
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:HOPE/Login/login_page.dart';
-import 'package:HOPE/Services/auth_services.dart';
-import 'package:HOPE/Services/globals.dart';
+import 'package:project_android_studio/Login/login_page.dart';
+import 'package:project_android_studio/Services/auth_services.dart';
+import 'package:project_android_studio/Services/globals.dart';
 import 'package:http/http.dart' as http;
 
+// ignore: must_be_immutable
 class SignUpPage extends StatelessWidget {
   String _email = '';
   String _password = '';
@@ -35,6 +34,7 @@ class SignUpPage extends StatelessWidget {
       }
     }
 
+    // Halooo Cuy
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
