@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:project_android_studio/Register/login_page.dart';
@@ -27,6 +29,7 @@ class SignUpPage extends StatelessWidget {
         } else {
           errorSnackBar(context, responseMap.values.first[0]);
         }
+        // ignore: dead_code
       } else {
         errorSnackBar(context, 'email not valid');
       }
