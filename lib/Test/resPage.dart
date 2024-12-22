@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 
 class DepressionResultPage extends StatelessWidget {
-  final int depressionScore;
   final List<int?> weeklyScores;
 
   DepressionResultPage({
-    required this.depressionScore,
     required this.weeklyScores,
   });
 
@@ -24,9 +22,25 @@ class DepressionResultPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Current score is the last entry in weeklyScores
+    final depressionScore = weeklyScores.last ?? 0;  // Handle the case where last score might be null
     final depressionDetails = getDepressionDetails(depressionScore);
     final backgroundColor = depressionDetails['color'] as Color;
     final depressionCategory = depressionDetails['category'] as String;
+
+    // Limit max bar height to avoid overflow
+    const double maxHeight = 180.0;
+
+    // Calculate the maximum bar height from weekly scores
+    double maxBarHeight = 0;
+    for (var score in weeklyScores) {
+      if (score != null) {
+        double barHeight = (score / 100) * maxHeight;
+        if (barHeight > maxBarHeight) {
+          maxBarHeight = barHeight;
+        }
+      }
+    }
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -74,23 +88,31 @@ class DepressionResultPage extends StatelessWidget {
             ),
           ),
 
-          // Bar plot section
+          // Bar plot section with white background behind the bars
           Expanded(
             flex: 2,
             child: Stack(
+              alignment: Alignment.bottomCenter,
               children: [
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: Container(
-                    width: 554, // Fixed width for the circle
-                    height: 554, // Fixed height for the circle
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
+                // White background container behind the bars (spanning full width)
+                Positioned(
+                  bottom: -20,  
+                  right: -50,
+                  left: -50,
+                  child: ClipRect(  // Prevent clipping of the white background
+                    child: Container(
+                      height: maxBarHeight + 120, 
+                      decoration: BoxDecoration(
+                        color: Colors.white, // White background
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(200),  
+                          topRight: Radius.circular(200),
+                        ),
+                      ),
                     ),
-                    transform: Matrix4.translationValues(0, 100, 0), // Positioned without considering padding
                   ),
                 ),
+                // Row containing the bars
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
                   child: Row(
@@ -112,16 +134,20 @@ class DepressionResultPage extends StatelessWidget {
                         barColor = Colors.red;
                       }
 
+                      // Limit bar height to avoid overflow
+                      double barHeight = (score != null ? (score / 100) * maxHeight : 10);
+                      barHeight = barHeight > maxHeight ? maxHeight : barHeight;
+
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Container(
-                            width: 30, // Wider bar width
-                            height: (score != null ? (score / 100) * 200 : 10),
+                            width: 45, // Wider bar width
+                            height: barHeight,
                             decoration: BoxDecoration(
                               color: barColor,
                               borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(15), // Enlarged radius for a semi-circle
+                                top: Radius.circular(30), // Enlarged radius for a semi-circle
                               ),
                             ),
                           ),
@@ -143,3 +169,9 @@ class DepressionResultPage extends StatelessWidget {
     );
   }
 }
+
+
+// to do
+// 1. benerin background putih
+// 2. bikin efektif & efisien
+// 3. tambahin bubble
