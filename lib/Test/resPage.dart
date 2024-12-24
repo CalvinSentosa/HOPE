@@ -55,8 +55,8 @@ class DepressionResultPage extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: -100,
-            right: -30,
+            top: -150,
+            right: -40,
             child: Container(
               width: 270,
               height: 270,
