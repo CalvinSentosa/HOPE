@@ -1,21 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:project_android_studio/Articles/artmed.dart';
+import 'package:project_android_studio/Articles/artmusic.dart';
+import 'package:project_android_studio/Articles/thankful.dart';
 
 class ArticlePage extends StatelessWidget {
-  final List<Map<String, String>> articles = [
+  final List<Map<String, dynamic>> articles = [
     {
       'title': '5 Benefits of Daily Meditation',
       'description': 'Learn how meditation can improve your daily life.',
-      'image': 'https://via.placeholder.com/150',
+      'image': 'assets/meditation_img.png',
+      'page': MeditationArticles(),
     },
     {
       'title': 'The Power of Gratitude',
       'description': 'Discover how being thankful can change your mindset.',
-      'image': 'https://via.placeholder.com/150',
+      'image': 'assets/thankful_img.jpg',
+      'page': ThankfulArticles()
     },
     {
       'title': 'Music Therapy for Relaxation',
       'description': 'Explore the healing power of music for stress relief.',
-      'image': 'https://via.placeholder.com/150',
+      'image': 'assets/MusicArticles.jpeg',
+      'page': MusicArticles()
     },
     {
       'title': 'How to Start Journaling',
@@ -48,11 +54,18 @@ class ArticlePage extends StatelessWidget {
                 itemCount: articles.length,
                 itemBuilder: (context, index) {
                   final article = articles[index];
-                  return ArticleCard(
-                    title: article['title']!,
-                    description: article['description']!,
-                    imageUrl: article['image']!,
-                  );
+                  return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => article['page']));
+                      },
+                      child: ArticleCard(
+                        title: article['title']!,
+                        description: article['description']!,
+                        imageUrl: article['image']!,
+                      ));
                 },
               ),
             ),
@@ -67,12 +80,14 @@ class ArticleCard extends StatelessWidget {
   final String title;
   final String description;
   final String imageUrl;
+  final Widget page;
 
-  const ArticleCard({
+  ArticleCard({
     super.key,
     required this.title,
     required this.description,
     required this.imageUrl,
+    this.page = const Placeholder(),
   });
 
   @override

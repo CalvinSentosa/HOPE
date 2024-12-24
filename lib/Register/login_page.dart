@@ -187,7 +187,7 @@ class LoginPage extends StatelessWidget {
                           0, // Gambar lebih ke atas agar tampak di atas setengah lingkaran
                       left: 80,
                       child: Image.asset(
-                        'Assets/logo_gambar.png',
+                        'assets/logo_gambar.png',
                         width: 250,
                         height: 250,
                       ),
