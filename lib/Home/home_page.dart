@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
     const Icon(Icons.home),
     // const MyHomePage()
     // const Icon(Icons.assignment)
-    DepressionResultPage(depressionScore: 77, weeklyScores: [60,70,77])
+    DepressionResultPage(weeklyScores: [100, 75, 50, 25])
   ];
 
   @override
