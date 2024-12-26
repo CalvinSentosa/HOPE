@@ -1,8 +1,6 @@
-// ignore_for_file: must_be_immutable
-
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:project_android_studio/Register/login_page.dart';
+import 'login_page.dart';
 import 'package:project_android_studio/Services/auth_services.dart';
 import 'package:project_android_studio/Services/globals.dart';
 import 'package:http/http.dart' as http;
@@ -10,15 +8,20 @@ import 'package:http/http.dart' as http;
 class SignUpPage extends StatelessWidget {
   String _email = '';
   String _password = '';
-  String _name = '';
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     createAccountPressed() async {
       bool emailValid = true;
       if (emailValid) {
-        http.Response response =
-            await AuthServices.register(_name, _email, _password);
+        _email = emailController.text;
+        _password = passwordController.text;
+        http.Response response = await AuthServices.register(_email, _password);
         Map responseMap = jsonDecode(response.body);
         if (response.statusCode == 200) {
           Navigator.push(
@@ -29,7 +32,6 @@ class SignUpPage extends StatelessWidget {
         } else {
           errorSnackBar(context, responseMap.values.first[0]);
         }
-        // ignore: dead_code
       } else {
         errorSnackBar(context, 'email not valid');
       }
@@ -83,16 +85,6 @@ class SignUpPage extends StatelessWidget {
               Center(
                 child: Column(
                   children: [
-                    Container(
-                      height: 120,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(
-                              "assets/images/header.png"), // Ganti dengan gambar header Anda
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
                     SizedBox(height: 16),
                     Text(
                       "Sign Up For Free",
@@ -109,6 +101,7 @@ class SignUpPage extends StatelessWidget {
 
               // Email Field
               TextField(
+                controller: emailController,
                 decoration: InputDecoration(
                   labelText: "Email Address",
                   hintText: "Enter your email...",
@@ -132,6 +125,7 @@ class SignUpPage extends StatelessWidget {
 
               // Password Field
               TextField(
+                controller: passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: "Password",
@@ -158,6 +152,7 @@ class SignUpPage extends StatelessWidget {
 
               // Confirm Password Field
               TextField(
+                controller: confirmPasswordController,
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: "Password Confirmation",
