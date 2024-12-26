@@ -30,7 +30,7 @@ class _LandingPage1State extends State<LandingPage1> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'Assets/logo.png',
+              'assets/logo.png',
               width: 300,
               height: 300,
             ),
