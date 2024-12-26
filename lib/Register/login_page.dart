@@ -1,9 +1,38 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'sign_up_page.dart';
+import 'package:project_android_studio/Home/home_page.dart';
+import 'dart:convert';
+import 'package:project_android_studio/Services/auth_services.dart';
+import 'package:project_android_studio/Services/globals.dart';
+import 'package:http/http.dart' as http;
 
 class LoginPage extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
+  String _email = '';
+  String _password = '';
+
+  void loginPressed() async {
+    if (_email.isNotEmpty && _password.isNotEmpty) {
+      http.Response response = await AuthServices.login(_email, _password);
+      Map responseMap = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (BuildContext context) => const HomePage(),
+            ));
+      } else {
+        errorSnackBar(context, responseMap.values.first);
+      }
+    } else {
+      errorSnackBar(context, 'enter all required fields');
+    }
+  }
+
     return Scaffold(
       backgroundColor: Color(0xFFF6F5F5),
       body: SingleChildScrollView(
@@ -41,6 +70,9 @@ class LoginPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(30),
                       ),
                     ),
+                    onChanged: (value) {
+                      _email = value;
+                    },
                   ),
                   SizedBox(height: 16),
                   TextField(
@@ -71,11 +103,15 @@ class LoginPage extends StatelessWidget {
                       //   color: Colors.green, // Warna label saat fokus
                       // ),
                     ),
+                    onChanged: (value) {
+                      _password = value;
+                    },
                   ),
                   SizedBox(height: 24),
                   ElevatedButton(
                     onPressed: () {
-                      // Aksi login
+                      // Navigasi ke halaman Sign Up
+                      loginPressed();
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.brown,
