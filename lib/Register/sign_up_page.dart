@@ -1,8 +1,6 @@
-// ignore_for_file: must_be_immutable
-
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:project_android_studio/Register/login_page.dart';
+import 'login_page.dart';
 import 'package:project_android_studio/Services/auth_services.dart';
 import 'package:project_android_studio/Services/globals.dart';
 import 'package:http/http.dart' as http;
@@ -10,15 +8,20 @@ import 'package:http/http.dart' as http;
 class SignUpPage extends StatelessWidget {
   String _email = '';
   String _password = '';
-  String _name = '';
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     createAccountPressed() async {
       bool emailValid = true;
       if (emailValid) {
+        _email = emailController.text;
+        _password = passwordController.text;
         http.Response response =
-            await AuthServices.register(_name, _email, _password);
+            await AuthServices.register(_email, _password);
         Map responseMap = jsonDecode(response.body);
         if (response.statusCode == 200) {
           Navigator.push(
@@ -29,7 +32,6 @@ class SignUpPage extends StatelessWidget {
         } else {
           errorSnackBar(context, responseMap.values.first[0]);
         }
-        // ignore: dead_code
       } else {
         errorSnackBar(context, 'email not valid');
       }
@@ -45,54 +47,41 @@ class SignUpPage extends StatelessWidget {
             children: [
               // Header Image
               Positioned(
-                top: 0, // Mengatur jarak gambar dari atas
-                left: 0, // Mengatur jarak gambar dari kiri
-                right: 0, // Mengatur gambar agar sejajar dengan kanan
-                child: Align(
-                  alignment:
-                      Alignment.topCenter, // Posisi gambar di tengah atas
-                  child: Stack(
-                    clipBehavior:
-                        Clip.none, // Agar gambar tidak terpotong oleh container
-                    children: [
-                      // Setengah lingkaran sebagai hiasan
-                      ClipPath(
-                        clipper: OvalClipper(),
-                        child: Container(
-                          height: 200,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF9BB168), // Green background
-                          ),
-                        ),
-                      ),
-                      // Gambar logo
-                      Positioned(
-                        top:
-                            0, // Gambar lebih ke atas agar tampak di atas setengah lingkaran
-                        left: 50,
-                        child: Image.asset(
-                          'Assets/logo_gambar.png',
-                          width: 250,
-                          height: 250,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Center(
-                child: Column(
+              top: 0, // Mengatur jarak gambar dari atas
+              left: 0, // Mengatur jarak gambar dari kiri
+              right: 0, // Mengatur gambar agar sejajar dengan kanan
+              child: Align(
+                alignment: Alignment.topCenter, // Posisi gambar di tengah atas
+                child: Stack(
+                  clipBehavior: Clip.none, // Agar gambar tidak terpotong oleh container
                   children: [
-                    Container(
-                      height: 120,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(
-                              "assets/images/header.png"), // Ganti dengan gambar header Anda
-                          fit: BoxFit.cover,
+                    // Setengah lingkaran sebagai hiasan
+                    ClipPath(
+                      clipper: OvalClipper(),
+                      child: Container(
+                        height: 200,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF9BB168), // Green background
                         ),
                       ),
                     ),
+                    // Gambar logo
+                    Positioned(
+                      top: 0, // Gambar lebih ke atas agar tampak di atas setengah lingkaran
+                      left: 50,
+                      child: Image.asset(
+                        'Assets/logo_gambar.png',
+                        width: 250,
+                        height: 250,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+              Center(
+                child: Column(
+                  children: [
                     SizedBox(height: 16),
                     Text(
                       "Sign Up For Free",
@@ -106,39 +95,39 @@ class SignUpPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 32),
-
+              
               // Email Field
               TextField(
+                controller: emailController,
                 decoration: InputDecoration(
                   labelText: "Email Address",
                   hintText: "Enter your email...",
                   prefixIcon: Icon(Icons.email),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey, width: 1),
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  // Mengatur warna border ketika fokus
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: Colors.green, width: 4), // Hijau ketika fokus
-                    borderRadius: BorderRadius.circular(30),
-                  ),
+                   border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey, width: 1),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    // Mengatur warna border ketika fokus
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.green, width: 4), // Hijau ketika fokus
+                      borderRadius: BorderRadius.circular(30),
+                    ),
                 ),
               ),
               SizedBox(height: 16),
 
               // Password Field
               TextField(
+                controller: passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: "Password",
                   hintText: "Enter your password...",
                   prefixIcon: Icon(Icons.lock),
-                  suffixIcon: Icon(Icons
-                      .visibility_off), // Tambahkan logika toggle jika diperlukan
+                  suffixIcon: Icon(Icons.visibility_off), // Tambahkan logika toggle jika diperlukan
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
@@ -148,8 +137,7 @@ class SignUpPage extends StatelessWidget {
                   ),
                   // Mengatur warna border ketika fokus
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: Colors.green, width: 4), // Hijau ketika fokus
+                    borderSide: BorderSide(color: Colors.green, width: 4), // Hijau ketika fokus
                     borderRadius: BorderRadius.circular(30),
                   ),
                 ),
@@ -158,13 +146,13 @@ class SignUpPage extends StatelessWidget {
 
               // Confirm Password Field
               TextField(
+                controller: confirmPasswordController,
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: "Password Confirmation",
                   hintText: "Confirm your password...",
                   prefixIcon: Icon(Icons.lock),
-                  suffixIcon: Icon(Icons
-                      .visibility_off), // Tambahkan logika toggle jika diperlukan
+                  suffixIcon: Icon(Icons.visibility_off), // Tambahkan logika toggle jika diperlukan
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
@@ -174,8 +162,7 @@ class SignUpPage extends StatelessWidget {
                   ),
                   // Mengatur warna border ketika fokus
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: Colors.green, width: 4), // Hijau ketika fokus
+                    borderSide: BorderSide(color: Colors.green, width: 4), // Hijau ketika fokus
                     borderRadius: BorderRadius.circular(30),
                   ),
                 ),
@@ -217,7 +204,7 @@ class SignUpPage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => LoginPage()),
-                    );
+                      );
                   },
                   child: Text(
                     "Already have an account? Sign In.",

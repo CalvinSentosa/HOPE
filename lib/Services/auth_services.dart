@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 class AuthServices {
   static Future<http.Response> register(
-      String name, String email, String password) async {
+      String email, String password) async {
     Map data = {
       "email": email,
       "password": password,
