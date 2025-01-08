@@ -1,7 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:project_android_studio/Home/appbar.dart';
-import 'package:project_android_studio/Test/resPage.dart';
+// import 'package:project_android_studio/Test/resPage.dart';
 // import 'package:flutter_tester/test_heart/test_heart.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
     const AppBarApp(),
     const Icon(Icons.home),
     // const MyHomePage()
-    // const Icon(Icons.assignment)
+    const Icon(Icons.assignment)
     // DepressionResultPage(weeklyScores: [100, 75, 50, 25, 50, 75, 100])
   ];
 

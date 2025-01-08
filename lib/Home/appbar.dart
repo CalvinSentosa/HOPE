@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_android_studio/Home/article.dart';
 import 'package:project_android_studio/Home/result.dart';
+import 'package:project_android_studio/Profile/moodcart.dart';
 
 /// Flutter code sample for [SliverAppBar].
 
@@ -63,7 +64,8 @@ class _SliverAppBarExampleState extends State<SliverAppBarExample> {
                       onTap: () {
                         showDialog(
                             context: context,
-                            builder: (context) => ResultPage(score: 85));
+                            // builder: (context) => ResultPage(score: 85));
+                            builder: (context) => MoodCard());
                       },
                       child: const CircleAvatar(
                         radius: 40,
