@@ -1,5 +1,7 @@
 // import 'package:flutter/foundation.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:project_android_studio/Home/article.dart';
 import 'package:project_android_studio/Home/result.dart';
 import 'package:project_android_studio/Profile/moodcart.dart';
@@ -114,7 +116,7 @@ class _SliverAppBarExampleState extends State<SliverAppBarExample> {
                           Row(
                             children: [
                               Text(
-                                'Sleep 😊',
+                                'Sleep 😴',
                                 style: TextStyle(color: Colors.white),
                               ),
                               SizedBox(width: 10),
@@ -231,7 +233,7 @@ class _SliverAppBarExampleState extends State<SliverAppBarExample> {
                                           color: Color(0xFFFFD5B5),
                                           shape: BoxShape.circle),
                                       child: Icon(
-                                        Icons.chat,
+                                        CupertinoIcons.chat_bubble_text_fill,
                                         color: Color(0xFFED7E1C),
                                       ),
                                     ),
@@ -263,35 +265,35 @@ class _SliverAppBarExampleState extends State<SliverAppBarExample> {
                             ActivityCard(
                               title: 'Daily Meditation',
                               icon: Icon(
-                                Icons.energy_savings_leaf,
+                                FontAwesome.leaf,
                                 color: Colors.green,
                               ),
                             ),
                             ActivityCard(
                               title: 'Gratefulness Journaling',
                               icon: Icon(
-                                Icons.book,
+                                CupertinoIcons.book,
                                 color: Colors.blue,
                               ),
                             ),
                             ActivityCard(
                               title: 'Music for the Soul',
                               icon: Icon(
-                                Icons.music_note,
+                                CupertinoIcons.music_note,
                                 color: Colors.purple,
                               ),
                             ),
                             ActivityCard(
                               title: 'Daily Run',
-                              icon: Icon(Icons.run_circle_outlined),
+                              icon: Icon(CupertinoIcons.speedometer),
                             ),
                             ActivityCard(
                               title: 'Comedy For Life',
-                              icon: Icon(Icons.theater_comedy_rounded),
+                              icon: Icon(CupertinoIcons.smiley),
                             ),
                             ActivityCard(
                               title: 'Relaxing Yoga',
-                              icon: Icon(Icons.mediation),
+                              icon: Icon(CupertinoIcons.eye),
                             ),
                           ],
                         ),
@@ -364,7 +366,7 @@ class _SliverAppBarExampleState extends State<SliverAppBarExample> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text('Healing Minds: Exploring the Path'),
-                                      Icon(Icons.arrow_forward),
+                                      Icon(CupertinoIcons.arrow_right),
                                     ],
                                   ),
                                 )

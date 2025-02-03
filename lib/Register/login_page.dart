@@ -1,6 +1,8 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'sign_up_page.dart';
 import 'package:project_android_studio/Home/home_page.dart';
 import 'dart:convert';
@@ -55,7 +57,7 @@ class LoginPage extends StatelessWidget {
                   TextField(
                     decoration: InputDecoration(
                       labelText: 'Email Address',
-                      prefixIcon: Icon(Icons.email),
+                      prefixIcon: Icon(CupertinoIcons.mail),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
@@ -80,8 +82,8 @@ class LoginPage extends StatelessWidget {
                     obscureText: true,
                     decoration: InputDecoration(
                       labelText: 'Password',
-                      prefixIcon: Icon(Icons.lock),
-                      suffixIcon: Icon(Icons.visibility_off),
+                      prefixIcon: Icon(CupertinoIcons.lock),
+                      suffixIcon: Icon(CupertinoIcons.eye_slash_fill),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
@@ -141,19 +143,19 @@ class LoginPage extends StatelessWidget {
                         onPressed: () {
                           // Login dengan Facebook
                         },
-                        icon: Icon(Icons.facebook),
+                        icon: Icon(FontAwesome.facebook),
                       ),
                       IconButton(
                         onPressed: () {
                           // Login dengan Google
                         },
-                        icon: Icon(Icons.g_mobiledata),
+                        icon: Icon(FontAwesome.google),
                       ),
                       IconButton(
                         onPressed: () {
                           // Login dengan Instagram
                         },
-                        icon: Icon(Icons.camera_alt),
+                        icon: Icon(FontAwesome.instagram),
                       ),
                     ],
                   ),

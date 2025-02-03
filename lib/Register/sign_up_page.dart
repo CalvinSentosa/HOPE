@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'login_page.dart';
 import 'package:project_android_studio/Services/auth_services.dart';
@@ -105,7 +106,7 @@ class SignUpPage extends StatelessWidget {
                 decoration: InputDecoration(
                   labelText: "Email Address",
                   hintText: "Enter your email...",
-                  prefixIcon: Icon(Icons.email),
+                  prefixIcon: Icon(CupertinoIcons.mail),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
