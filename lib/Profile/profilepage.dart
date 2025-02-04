@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/profilepage2.dart'; 
+import 'package:project_android_studio/Profile/profilepage2.dart'; 
 
 class ProfilePage extends StatelessWidget {
   final String name;

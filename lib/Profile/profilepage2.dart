@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter_application_1/screens/profilepage.dart';
-import 'package:flutter_application_1/screens/camera.dart';
+import 'package:project_android_studio/Profile/camera.dart';
 
 
 class ProfilePage2 extends StatelessWidget {
