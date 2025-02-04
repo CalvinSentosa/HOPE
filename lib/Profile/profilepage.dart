@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_android_studio/Profile/profilepage2.dart'; 
 
@@ -63,15 +64,16 @@ class ProfilePage extends StatelessWidget {
                     alignment: Alignment.center,
                     children: [
                       Container(
-                          padding: EdgeInsets.all(0), // Adjust padding to control border thickness
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: Colors.white, // Border color
-                              width: 4, // Border width
-                            ),
+                        padding: EdgeInsets.all(
+                            0), // Adjust padding to control border thickness
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: Colors.white, // Border color
+                            width: 4, // Border width
                           ),
-                        child :CircleAvatar(
+                        ),
+                        child: CircleAvatar(
                           radius: 50,
                           backgroundColor: Colors.blue,
                         ),
@@ -80,7 +82,8 @@ class ProfilePage extends StatelessWidget {
                         bottom: 0,
                         right: 37,
                         child: Container(
-                          padding: EdgeInsets.all(0), // Adjust padding to control border thickness
+                          padding: EdgeInsets.all(
+                              0), // Adjust padding to control border thickness
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(
@@ -92,11 +95,13 @@ class ProfilePage extends StatelessWidget {
                             radius: 17,
                             backgroundColor: Colors.white,
                             child: IconButton(
-                              icon: Icon(Icons.edit, size: 16, color: Colors.black),
+                              icon: Icon(CupertinoIcons.pen,
+                                  size: 20, color: Colors.black),
                               onPressed: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ProfilePage2()),
+                                  MaterialPageRoute(
+                                      builder: (context) => ProfilePage2()),
                                 );
                               },
                             ),
