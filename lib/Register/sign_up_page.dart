@@ -6,6 +6,7 @@ import 'package:project_android_studio/Services/auth_services.dart';
 import 'package:project_android_studio/Services/globals.dart';
 import 'package:http/http.dart' as http;
 
+// ignore: must_be_immutable
 class SignUpPage extends StatelessWidget {
   String _email = '';
   String _password = '';
@@ -33,6 +34,7 @@ class SignUpPage extends StatelessWidget {
         } else {
           errorSnackBar(context, responseMap.values.first[0]);
         }
+        // ignore: dead_code
       } else {
         errorSnackBar(context, 'email not valid');
       }

@@ -23,11 +23,11 @@ class ArticlePage extends StatelessWidget {
       'image': 'assets/MusicArticles.jpeg',
       'page': MusicArticles()
     },
-    {
-      'title': 'How to Start Journaling',
-      'description': 'Step-by-step guide to start your journaling journey.',
-      'image': 'https://via.placeholder.com/150',
-    },
+    // {
+    //   'title': 'How to Start Journaling',
+    //   'description': 'Step-by-step guide to start your journaling journey.',
+    //   'image': 'https://via.placeholder.com/150',
+    // },
   ];
 
   ArticlePage({super.key});
@@ -110,7 +110,7 @@ class ArticleCard extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(8.0),
-            child: Image.network(
+            child: Image.asset(
               imageUrl,
               width: 80,
               height: 80,

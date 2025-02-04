@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_application_1/screens/profilepage.dart';
-import 'package:flutter_application_1/screens/camera.dart';
-
+import 'package:project_android_studio/Profile/camera.dart';
 
 class ProfilePage2 extends StatelessWidget {
   final TextEditingController _fullNameController = TextEditingController();
@@ -10,7 +8,7 @@ class ProfilePage2 extends StatelessWidget {
   final TextEditingController _genderController = TextEditingController();
   final TextEditingController _weightController = TextEditingController();
   final TextEditingController _heightController = TextEditingController();
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,20 +16,23 @@ class ProfilePage2 extends StatelessWidget {
         backgroundColor: Colors.green,
         elevation: 0,
         leading: Padding(
-        padding: const EdgeInsets.only(left: 16), // Move to the right by 16 pixels
-        child: GestureDetector(
-          onTap: () {
+          padding:
+              const EdgeInsets.only(left: 16), // Move to the right by 16 pixels
+          child: GestureDetector(
+            onTap: () {
               Navigator.pop(context); // Navigate back to the previous screen
             },
-          child: Container(
-            width: 40, // Diameter of the circle
-            height: 40, // Diameter of the circle
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.white, // Fill the circle with white
-              border: Border.all(color: Colors.white, width: 1), // Circle border
-            ),
-            child: const Icon(Icons.arrow_back, color: Colors.black, size: 20), // Back arrow icon
+            child: Container(
+              width: 40, // Diameter of the circle
+              height: 40, // Diameter of the circle
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white, // Fill the circle with white
+                border:
+                    Border.all(color: Colors.white, width: 1), // Circle border
+              ),
+              child: const Icon(Icons.arrow_back,
+                  color: Colors.black, size: 20), // Back arrow icon
             ),
           ),
         ),
@@ -58,15 +59,16 @@ class ProfilePage2 extends StatelessWidget {
                     alignment: Alignment.center,
                     children: [
                       Container(
-                          padding: EdgeInsets.all(0), // Adjust padding to control border thickness
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: Colors.white, // Border color
-                              width: 4, // Border width
-                            ),
+                        padding: EdgeInsets.all(
+                            0), // Adjust padding to control border thickness
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: Colors.white, // Border color
+                            width: 4, // Border width
                           ),
-                        child :CircleAvatar(
+                        ),
+                        child: CircleAvatar(
                           radius: 50,
                           backgroundColor: Colors.blue,
                         ),
@@ -75,7 +77,8 @@ class ProfilePage2 extends StatelessWidget {
                         bottom: 0,
                         right: 37,
                         child: Container(
-                          padding: EdgeInsets.all(0), // Adjust padding to control border thickness
+                          padding: EdgeInsets.all(
+                              0), // Adjust padding to control border thickness
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(
@@ -87,11 +90,13 @@ class ProfilePage2 extends StatelessWidget {
                             radius: 17,
                             backgroundColor: Colors.white,
                             child: IconButton(
-                              icon: Icon(Icons.camera_alt, size: 16, color: Colors.black),
+                              icon: Icon(Icons.camera_alt,
+                                  size: 16, color: Colors.black),
                               onPressed: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => CameraApp()),
+                                  MaterialPageRoute(
+                                      builder: (context) => CameraApp()),
                                 );
                               },
                             ),
@@ -181,7 +186,8 @@ class ProfilePage2 extends StatelessWidget {
                         String height = _heightController.text;
 
                         // You can handle saving the data here
-                        print('Saved Profile: $fullName, $email, $dob, $gender, $weight, $height');
+                        print(
+                            'Saved Profile: $fullName, $email, $dob, $gender, $weight, $height');
 
                         // Optionally, navigate to a different screen after saving
                         // For example, navigate back to the previous screen:
@@ -190,7 +196,8 @@ class ProfilePage2 extends StatelessWidget {
                       child: Text("Save"),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
-                        padding: EdgeInsets.symmetric(horizontal: 100, vertical: 16),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 100, vertical: 16),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -245,12 +252,16 @@ class ProfileInputField extends StatelessWidget {
               borderRadius: BorderRadius.circular(30), // Rounded corners
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(30), // Rounded edges when not focused
-              borderSide: BorderSide(color: Colors.grey), // Border color when not focused
+              borderRadius:
+                  BorderRadius.circular(30), // Rounded edges when not focused
+              borderSide: BorderSide(
+                  color: Colors.grey), // Border color when not focused
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(30), // Rounded edges when focused
-              borderSide: BorderSide(color: Colors.blue), // Border color when focused
+              borderRadius:
+                  BorderRadius.circular(30), // Rounded edges when focused
+              borderSide:
+                  BorderSide(color: Colors.blue), // Border color when focused
             ),
           ),
         ),
@@ -258,7 +269,6 @@ class ProfileInputField extends StatelessWidget {
     );
   }
 }
-
 
 // Custom Clipper for Oval Shape
 class OvalClipper extends CustomClipper<Path> {

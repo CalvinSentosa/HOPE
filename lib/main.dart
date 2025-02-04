@@ -9,10 +9,12 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    print("Helo");
+    print(DefaultTextStyle.of(context).style.fontFamily);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(useMaterial3: true, fontFamily: 'MaterialIcons'),
-      home: HomePage(),
+      theme: ThemeData(useMaterial3: true),
+      home: LandingPage1(),
     );
   }
 }
