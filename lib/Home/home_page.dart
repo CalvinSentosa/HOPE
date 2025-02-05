@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:project_android_studio/Home/appbar.dart';
+
+import '../Chatbot/chatbot.dart';
 // import 'package:project_android_studio/Test/resPage.dart';
 // import 'package:flutter_tester/test_heart/test_heart.dart';
 
@@ -18,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   List<Widget> body = [
     const AppBarApp(),
-    const Icon(CupertinoIcons.home),
+    const ChatPage(),
     // const MyHomePage()
     const Icon(CupertinoIcons.square_list)
     // DepressionResultPage(weeklyScores: [100, 75, 50, 25, 50, 75, 100])
