@@ -22,9 +22,7 @@ class _HomePageState extends State<HomePage> {
   List<Widget> body = [
     const AppBarApp(),
     const ChatPage(),
-    // const MyHomePage()
     const TakePictureScreen(),
-    // DepressionResultPage(weeklyScores: [100, 75, 50, 25, 50, 75, 100])
   ];
 
   @override

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_android_studio/Test/resPage.dart';
 
 class QuestionPage extends StatefulWidget {
   const QuestionPage({Key? key}) : super(key: key);
@@ -179,7 +180,7 @@ class _QuestionPageState extends State<QuestionPage> {
                       // Navigasi ke halaman berikutnya
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => NextPage()),
+                        MaterialPageRoute(builder: (context) => DepressionResultPage(weeklyScores: [100, 75, 50, 25, 50, 75, 100])),
                       );
                     },
                     child: const Text("Finish"),
@@ -254,20 +255,6 @@ class _QuestionPageState extends State<QuestionPage> {
             ],
           )
         ],
-      ),
-    );
-  }
-}
-
-class NextPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Next Page"),
-      ),
-      body: Center(
-        child: const Text('This is the next page!'),
       ),
     );
   }
