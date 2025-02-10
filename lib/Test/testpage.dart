@@ -140,6 +140,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   @override
   void initState() {
     super.initState();
+    _initializeControllerFuture = Future.value();
     initializeCamera();
   }
 
@@ -174,14 +175,11 @@ class TakePictureScreenState extends State<TakePictureScreen> {
       try {
         // 🔥 Nyalakan flash
         await _controller!.setFlashMode(FlashMode.torch);
+        await Future.delayed(Duration(milliseconds: 500));
       } catch (e) {
         print("Error enabling flash: $e");
       }
     }
-
-    // Pastikan kamera dilepaskan sebelum membuka BPM detection
-    await _controller?.dispose();
-    _controller = null;
 
     showDialog(
       context: context,
@@ -206,7 +204,9 @@ class TakePictureScreenState extends State<TakePictureScreen> {
           print("Error disabling flash: $e");
         }
       }
-
+      // Pastikan kamera dilepaskan sebelum membuka BPM detection
+      await _controller?.dispose();
+      _controller = null;
       // Reinitialize camera setelah selesai mendeteksi BPM
       initializeCamera();
     });
@@ -288,4 +288,3 @@ class TakePictureScreenState extends State<TakePictureScreen> {
     );
   }
 }
-
