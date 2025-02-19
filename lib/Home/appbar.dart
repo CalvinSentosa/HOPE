@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:project_android_studio/Home/article.dart';
 import 'package:project_android_studio/Profile/profilepage.dart';
+import 'package:project_android_studio/Test/questionpage.dart';
 import 'package:project_android_studio/main.dart';
 
 /// Flutter code sample for [SliverAppBar].
@@ -30,7 +31,7 @@ class SliverAppBarExample extends StatefulWidget {
 
 class _SliverAppBarExampleState extends State<SliverAppBarExample> {
   final bool _pinned = true;
-
+  bool _isSubmitted = true;
 // [SliverAppBar]s are typically used in [CustomScrollView.slivers], which in
 // turn can be placed in a [Scaffold.body].
   @override
@@ -178,8 +179,8 @@ class _SliverAppBarExampleState extends State<SliverAppBarExample> {
                               Container(
                                 width: double.infinity,
                                 height: 150,
-                                margin:
-                                    EdgeInsets.only(left: 5, right: 5, top: 5),
+                                margin: EdgeInsets.only(
+                                    left: 12, right: 12, top: 5),
                                 // padding: EdgeInsets.all(10),
                                 decoration: BoxDecoration(
                                     color: Color(0xFFD3DDBC),
@@ -229,7 +230,9 @@ class _SliverAppBarExampleState extends State<SliverAppBarExample> {
                                       (MediaQuery.of(context).size.width / 2) -
                                           30,
                                   child: GestureDetector(
-                                    onTap: () {},
+                                    onTap: () {
+                                      homePageKey.currentState?.changeTab(1);
+                                    },
                                     child: Container(
                                       padding: EdgeInsets.all(15),
                                       decoration: BoxDecoration(
@@ -249,71 +252,77 @@ class _SliverAppBarExampleState extends State<SliverAppBarExample> {
                       const SizedBox(height: 20),
 
                       // Suggested Activities
-                      const Padding(
-                        padding: EdgeInsets.only(left: 10),
-                        child: Text(
-                          'Suggested Activity',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18),
+                      Container(
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 18),
+                          child: Text(
+                            'Suggested Activity',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 18),
+                          ),
                         ),
                       ),
 
-                      const SizedBox(height: 10),
                       //////////////////////////////////
-                      const SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            ActivityCard(
-                              title: 'Daily Meditation',
-                              icon: Icon(
-                                FontAwesome.leaf,
-                                color: Colors.green,
+                      ///
+                      Container(
+                        margin: EdgeInsets.only(left: 3, right: 3),
+                        width: double.infinity,
+                        height: 130,
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              ActivityCard(
+                                title: 'Daily Meditation',
+                                icon: Icon(
+                                  FontAwesome.leaf,
+                                  color: Colors.green,
+                                ),
                               ),
-                            ),
-                            ActivityCard(
-                              title: 'Gratefulness Journaling',
-                              icon: Icon(
-                                CupertinoIcons.book,
-                                color: Colors.blue,
+                              ActivityCard(
+                                title: 'Gratefulness Journaling',
+                                icon: Icon(
+                                  CupertinoIcons.book,
+                                  color: Colors.blue,
+                                ),
                               ),
-                            ),
-                            ActivityCard(
-                              title: 'Music for the Soul',
-                              icon: Icon(
-                                CupertinoIcons.music_note,
-                                color: Colors.purple,
+                              ActivityCard(
+                                title: 'Music for the Soul',
+                                icon: Icon(
+                                  CupertinoIcons.music_note,
+                                  color: Colors.purple,
+                                ),
                               ),
-                            ),
-                            ActivityCard(
-                              title: 'Daily Run',
-                              icon: Icon(CupertinoIcons.speedometer),
-                            ),
-                            ActivityCard(
-                              title: 'Comedy For Life',
-                              icon: Icon(CupertinoIcons.smiley),
-                            ),
-                            ActivityCard(
-                              title: 'Relaxing Yoga',
-                              icon: Icon(CupertinoIcons.eye),
-                            ),
-                          ],
+                              ActivityCard(
+                                title: 'Daily Run',
+                                icon: Icon(CupertinoIcons.speedometer),
+                              ),
+                              ActivityCard(
+                                title: 'Comedy For Life',
+                                icon: Icon(CupertinoIcons.smiley),
+                              ),
+                              ActivityCard(
+                                title: 'Relaxing Yoga',
+                                icon: Icon(CupertinoIcons.eye),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
 
-                      const SizedBox(height: 10), /////////////////
+                      /////////////////
 
                       // Mindful Articles
                       Container(
-                        width: 600,
+                        width: double.infinity,
+                        height: 40,
                         alignment: Alignment.topLeft,
+                        margin: EdgeInsets.only(right: 8, left: 8),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            // SizedBox(
-                            //   height: 10,
-                            // ),
                             const Padding(
                               padding: EdgeInsets.only(left: 10),
                               child: Text(
@@ -323,18 +332,21 @@ class _SliverAppBarExampleState extends State<SliverAppBarExample> {
                               ),
                             ),
                             TextButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ArticlePage()));
-                                },
-                                child: const Text('See All')),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ArticlePage()));
+                              },
+                              child: Text('See All'),
+                            ),
                           ],
                         ),
                       ),
 
                       ////////////
+                      ///
+                      ///
                       ///
 
                       GestureDetector(
@@ -345,8 +357,9 @@ class _SliverAppBarExampleState extends State<SliverAppBarExample> {
                                 builder: (context) => ArticlePage(),
                               ));
                         },
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 5),
+                        child: Container(
+                          width: double.infinity,
+                          margin: EdgeInsets.only(left: 10, right: 10),
                           child: Card(
                             // elevation: 2,
                             shape: RoundedRectangleBorder(
@@ -378,7 +391,8 @@ class _SliverAppBarExampleState extends State<SliverAppBarExample> {
                           ),
                         ),
                       ),
-                      const PopUp()
+                      _isSubmitted ? Container() : PopUp()
+
                       // ENDING BODY - END
                     ],
                   ),
@@ -443,9 +457,24 @@ class PopUp extends StatelessWidget {
       showDialog(
           context: context,
           builder: (BuildContext context) {
-            return const AlertDialog(
-              title: Text("Hayo Mau Kemana Kamu"),
-              content: Text("Udah isi test belom?"),
+            return AlertDialog(
+              title: Text("Test Reminder"),
+              content: Container(
+                child: Row(
+                  children: [
+                    Text("Kamu belum isi test ya?"),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => QuestionPage()));
+                      },
+                      child: Text("Yuk isi tes!"),
+                    )
+                  ],
+                ),
+              ),
             );
           });
     });
