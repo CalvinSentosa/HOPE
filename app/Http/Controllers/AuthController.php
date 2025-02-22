@@ -50,4 +50,36 @@ class AuthController extends Controller
         $response = ['message' => 'Incorrect email or password'];
         return response()->json($response, 400);
     }
+
+    public function updateData(Request $request)
+    {
+        // Validasi input data
+        $request->validate([
+            'email'  => 'required|email|exists:users,email',
+            'name'   => 'required|string|max:255',
+            'gender' => 'required',
+            'dob' => 'required',
+            'weight' => 'required',
+            'height' => 'required',
+        ]);
+
+        // Cari user berdasarkan email
+        $user = User::where('email', $request->input('email'))->first();
+
+        // Update kolom yang sudah ada tanpa membuat kolom baru
+        // Misalnya, menambahkan data 'nama' dan 'gender'
+        $user->name = $request->input('name');
+        $user->gender = $request->input('gender');
+        $user->dob = $request->input('dob');
+        $user->weight = $request->input('weight');
+        $user->height = $request->input('height');
+        
+        // Simpan perubahannya ke database
+        $user->save();
+
+        return response()->json([
+            'message' => 'Data berhasil diperbarui',
+            'data' => $user
+        ]);
+    }
 }
