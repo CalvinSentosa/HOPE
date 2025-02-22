@@ -36,4 +36,24 @@ class AuthServices {
     print(response.body);
     return response;
   }
+
+  static Future<http.Response> updateData(
+      String email, String name, String gender, DateTime dob, int weight, int height) async {
+    Map data = {
+      "name": name,
+      "gender": gender,
+      "dob": dob.toIso8601String(),
+      "weight":weight,
+      "height":height
+    };
+    var body = json.encode(data);
+    var url = Uri.parse(baseURL + 'auth/updateData');
+    http.Response response = await http.post(
+      url,
+      headers: headers,
+      body: body,
+    );
+    print(response.body);
+    return response;
+  }
 }

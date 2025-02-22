@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_android_studio/Home/home_page.dart';
+import 'package:project_android_studio/Register/landing_pages.dart';
 // import 'Register/landing_pages.dart';
 
 void main() {
@@ -14,7 +15,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(useMaterial3: true),
-      home: HomePage(key: homePageKey),
+      home: LandingPage1(),
+      //home: HomePage(key: homePageKey),
     );
   }
 }

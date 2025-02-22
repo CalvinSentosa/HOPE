@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 // import 'package:flutter_application_1/screens/profilepage.dart';
 import 'package:project_android_studio/Profile/camera.dart';
+import 'package:project_android_studio/Services/auth_services.dart';
+import 'package:project_android_studio/Services/globals.dart';
+import 'package:intl/intl.dart';
 
 
 class ProfilePage2 extends StatelessWidget {
@@ -182,10 +186,20 @@ class ProfilePage2 extends StatelessWidget {
                         // Handle saving the profile data
                         String fullName = _fullNameController.text;
                         String email = _emailController.text;
-                        String dob = _dobController.text;
+                        
+                        final String dobText = _dobController.text;
+                        final DateFormat formatter = DateFormat('dd-mm-yyyy');
+                        final DateTime dob = formatter.parse(dobText);
+
                         String gender = _genderController.text;
-                        String weight = _weightController.text;
-                        String height = _heightController.text;
+                        int weight = int.parse(_weightController.text);
+                        int height = int.parse(_heightController.text);
+
+                        Future<void> updateData() async {
+                          http.Response response = await AuthServices.updateData(email, fullName, gender, dob, weight, height);
+                        }
+
+                        updateData();
 
                         // You can handle saving the data here
                         print(
@@ -193,7 +207,7 @@ class ProfilePage2 extends StatelessWidget {
 
                         // Optionally, navigate to a different screen after saving
                         // For example, navigate back to the previous screen:
-                        Navigator.pop(context);
+                        //Navigator.pop(context);
                       },
                       child: Text("Save"),
                       style: ElevatedButton.styleFrom(
