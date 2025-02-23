@@ -1,13 +1,21 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 // import 'package:flutter_application_1/screens/profilepage.dart';
 import 'package:project_android_studio/Profile/camera.dart';
 import 'package:project_android_studio/Services/auth_services.dart';
-import 'package:project_android_studio/Services/globals.dart';
+// import 'package:project_android_studio/Services/globals.dart';
 import 'package:intl/intl.dart';
 
-
+// ignore: must_be_immutable
 class ProfilePage2 extends StatelessWidget {
+  String email = '';
+  String fullName = '';
+  String dob = '';
+  String gender = '';
+  int weight = 0;
+  int height = 0;
+
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _dobController = TextEditingController();
@@ -15,8 +23,40 @@ class ProfilePage2 extends StatelessWidget {
   final TextEditingController _weightController = TextEditingController();
   final TextEditingController _heightController = TextEditingController();
 
+  ProfilePage2({super.key});
+
   @override
   Widget build(BuildContext context) {
+    updateData() async {
+      String fullName = _fullNameController.text;
+      String email = _emailController.text;
+
+      final String dobText = _dobController.text;
+      final DateFormat formatter = DateFormat('dd-MM-yyyy');
+      final DateTime dob = formatter.parse(dobText);
+
+      String gender = _genderController.text;
+
+      try {
+        weight = int.parse(_weightController.text);
+        height = int.parse(_heightController.text);
+      } catch (e) {
+        errorSnackBar(context, "Berat dan Tinggi harus berupa angka");
+      }
+
+      http.Response response = await AuthServices.updateData(
+          email, fullName, gender, dob, weight, height);
+
+      if (response.statusCode == 200) {
+        successSnackBar(context, "Data updated!");
+      } else {
+        Map<String, dynamic> responseMap = jsonDecode(response.body);
+        String errorMessage =
+            responseMap['message'] ?? 'Terjadi kesalahan, coba lagi.';
+        errorSnackBar(context, errorMessage);
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
@@ -184,20 +224,6 @@ class ProfilePage2 extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {
                         // Handle saving the profile data
-                        String fullName = _fullNameController.text;
-                        String email = _emailController.text;
-                        
-                        final String dobText = _dobController.text;
-                        final DateFormat formatter = DateFormat('dd-mm-yyyy');
-                        final DateTime dob = formatter.parse(dobText);
-
-                        String gender = _genderController.text;
-                        int weight = int.parse(_weightController.text);
-                        int height = int.parse(_heightController.text);
-
-                        Future<void> updateData() async {
-                          http.Response response = await AuthServices.updateData(email, fullName, gender, dob, weight, height);
-                        }
 
                         updateData();
 
@@ -303,4 +329,26 @@ class OvalClipper extends CustomClipper<Path> {
   bool shouldReclip(CustomClipper<Path> oldClipper) {
     return false; // Return true if the path needs to be redrawn
   }
+}
+
+void successSnackBar(BuildContext context, String msg) {
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    content: Text(
+      msg,
+      style: TextStyle(color: Colors.white),
+    ),
+    backgroundColor: Colors.green,
+    duration: Duration(seconds: 2),
+  ));
+}
+
+void errorSnackBar(BuildContext context, String msg) {
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    content: Text(
+      msg,
+      style: TextStyle(color: Colors.white),
+    ),
+    backgroundColor: Colors.red,
+    duration: Duration(seconds: 2),
+  ));
 }
