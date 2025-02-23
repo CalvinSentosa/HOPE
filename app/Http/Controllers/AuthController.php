@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 
+
 class AuthController extends Controller
 {
     //
@@ -53,33 +54,39 @@ class AuthController extends Controller
 
     public function updateData(Request $request)
     {
+        // \Log::info('Data diterima:', $request->all());
         // Validasi input data
+
+        // $user = request()->user(); 
+
         $request->validate([
-            'email'  => 'required|email|exists:users,email',
-            'name'   => 'required|string|max:255',
-            'gender' => 'required',
-            'dob' => 'required',
-            'weight' => 'required',
-            'height' => 'required',
+            'email' => 'required|email',
+            // 'name'   => 'required|string|max:255',
+            // 'gender' => 'required',
+            // 'dob' => 'required',
+            // 'weight' => 'required',
+            // 'height' => 'required',
         ]);
 
-        // Cari user berdasarkan email
         $user = User::where('email', $request->input('email'))->first();
 
-        // Update kolom yang sudah ada tanpa membuat kolom baru
-        // Misalnya, menambahkan data 'nama' dan 'gender'
-        $user->name = $request->input('name');
-        $user->gender = $request->input('gender');
-        $user->dob = $request->input('dob');
-        $user->weight = $request->input('weight');
-        $user->height = $request->input('height');
-        
-        // Simpan perubahannya ke database
-        $user->save();
-
-        return response()->json([
-            'message' => 'Data berhasil diperbarui',
-            'data' => $user
+        $user->update([
+            'name'   => $request->input('name'),
+            'gender' => $request->input('gender'),
+            'dob'    => $request->input('dob'),
+            'weight' => $request->input('weight'),
+            'height' => $request->input('height'),
         ]);
+
+        if ($user->save()) {
+            return response()->json([
+                'message' => 'Data berhasil diperbarui',
+                'data'    => $user
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Gagal menyimpan data ke database'
+            ], 500);
     }
+}
 }
