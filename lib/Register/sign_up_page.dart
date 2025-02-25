@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project_android_studio/Services/provider.dart';
+import 'package:provider/provider.dart';
 import 'login_page.dart';
 import 'package:project_android_studio/Services/auth_services.dart';
 import 'package:project_android_studio/Services/globals.dart';
@@ -25,7 +27,17 @@ class SignUpPage extends StatelessWidget {
         _password = passwordController.text;
         http.Response response = await AuthServices.register(_email, _password);
         Map responseMap = jsonDecode(response.body);
+
         if (response.statusCode == 200) {
+          final userProvider =
+              Provider.of<UserProvider>(context, listen: false);
+
+          userProvider.setUserData({
+            "email": responseMap['email'],
+          });
+
+          userProvider.loadUserData();
+
           Navigator.push(
               context,
               MaterialPageRoute(

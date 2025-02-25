@@ -3,6 +3,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:project_android_studio/Services/provider.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'sign_up_page.dart';
 import 'package:project_android_studio/Home/home_page.dart';
 import 'dart:convert';
@@ -15,14 +18,31 @@ final GlobalKey<HomePageState> homePageKey = GlobalKey();
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    String _email = '';
-    String _password = '';
+    String email = '';
+    String password = '';
 
     void loginPressed() async {
-      if (_email.isNotEmpty && _password.isNotEmpty) {
-        http.Response response = await AuthServices.login(_email, _password);
-        Map responseMap = jsonDecode(response.body);
+      if (email.isNotEmpty && password.isNotEmpty) {
+        http.Response response = await AuthServices.login(email, password);
+        // print("Raw API Response: ${response.body}");
+        Map<String, dynamic> responseMap = jsonDecode(response.body);
+        // print("Decoded JSON: $responseMap");
+
         if (response.statusCode == 200) {
+          final userProvider =
+              Provider.of<UserProvider>(context, listen: false);
+
+          // Simpan data ke Provider
+          userProvider.setUserData({
+            "email": responseMap['user']['email'],
+          });
+
+          // Simpan data ke SharedPreferences agar tetap ada setelah aplikasi ditutup
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          await prefs.setString("user_data", jsonEncode(userProvider.userData));
+
+          // Debugging (cek apakah email benar tersimpan)
+          // print("Email yang tersimpan: ${responseMap['user']['email']}");
           Navigator.push(
               context,
               MaterialPageRoute(
@@ -76,7 +96,7 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                     onChanged: (value) {
-                      _email = value;
+                      email = value;
                     },
                   ),
                   SizedBox(height: 16),
@@ -111,7 +131,7 @@ class LoginPage extends StatelessWidget {
                       // ),
                     ),
                     onChanged: (value) {
-                      _password = value;
+                      password = value;
                     },
                   ),
                   SizedBox(height: 24),

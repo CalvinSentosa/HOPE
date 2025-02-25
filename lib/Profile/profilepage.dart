@@ -1,48 +1,46 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:project_android_studio/Profile/profilepage2.dart'; 
+import 'package:project_android_studio/Home/home_page.dart';
+import 'package:project_android_studio/Profile/profilepage2.dart';
+import 'package:project_android_studio/Services/provider.dart';
+import 'package:provider/provider.dart';
 
 class ProfilePage extends StatelessWidget {
-  final String name;
-  final String age;
-  final String weight;
-  final String height;
-
-  ProfilePage({
-    required this.name,
-    required this.age,
-    required this.weight,
-    required this.height,
-  });
-
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+    userProvider.loadUserData();
+    final userData = userProvider.userData;
+    // print("Name: $name");
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Colors.green,
-      //   elevation: 0,
-      //   leading: Padding(
-      //   padding: const EdgeInsets.only(left: 16), // Move to the right by 16 pixels
-      //   child: GestureDetector(
-      //     onTap: () {
-      //       Navigator.push(
-      //         context,
-      //         MaterialPageRoute(builder: (context) => ProfilePage()),
-      //       );
-      //     },
-      //     child: Container(
-      //       width: 40, // Diameter of the circle
-      //       height: 40, // Diameter of the circle
-      //       decoration: BoxDecoration(
-      //         shape: BoxShape.circle,
-      //         color: Colors.white, // Fill the circle with white
-      //         border: Border.all(color: Colors.black, width: 1), // Circle border
-      //       ),
-      //       child: const Icon(Icons.arrow_back, color: Colors.black, size: 20), // Back arrow icon
-      //       ),
-      //     ),
-      //   ),
-      // ),
+      appBar: AppBar(
+        backgroundColor: Colors.green,
+        elevation: 0,
+        leading: Padding(
+          padding:
+              const EdgeInsets.only(left: 16), // Move to the right by 16 pixels
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HomePage()),
+              );
+            },
+            child: Container(
+              width: 40, // Diameter of the circle
+              height: 40, // Diameter of the circle
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white, // Fill the circle with white
+                border:
+                    Border.all(color: Colors.black, width: 1), // Circle border
+              ),
+              child: const Icon(CupertinoIcons.arrow_left,
+                  color: Colors.black, size: 20), // Back arrow icon
+            ),
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -115,7 +113,7 @@ class ProfilePage extends StatelessWidget {
             ),
             SizedBox(height: 16),
             Text(
-              name,
+              userData?['name']?.toString() ?? 'User',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -127,26 +125,30 @@ class ProfilePage extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ProfileInfoCard(label: 'Age', value: age),
+                ProfileInfoCard(label: 'Age', value: '19'),
                 Container(
                   height: 30,
                   width: 1.5,
                   color: Colors.black,
                   margin: EdgeInsets.symmetric(horizontal: 20),
                 ),
-                ProfileInfoCard(label: 'Weight', value: weight),
+                ProfileInfoCard(
+                    label: 'Weight',
+                    value: userData?['weight']?.toString() ?? '-'),
                 Container(
                   height: 30,
                   width: 1.5,
                   color: Colors.black,
                   margin: EdgeInsets.symmetric(horizontal: 20),
                 ),
-                ProfileInfoCard(label: 'Height', value: height),
+                ProfileInfoCard(
+                    label: 'Height',
+                    value: userData?['height']?.toString() ?? '-'),
               ],
             ),
             SizedBox(height: 20),
             MoodCard(),
-            // SizedBox(height: 16),
+
             // MoodCard2(),
           ],
         ),

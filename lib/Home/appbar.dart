@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:project_android_studio/Home/article.dart';
 import 'package:project_android_studio/Profile/profilepage.dart';
+import 'package:project_android_studio/Services/provider.dart';
 import 'package:project_android_studio/Test/questionpage.dart';
 import 'package:project_android_studio/main.dart';
+import 'package:provider/provider.dart';
 
 /// Flutter code sample for [SliverAppBar].
 
@@ -36,6 +38,10 @@ class _SliverAppBarExampleState extends State<SliverAppBarExample> {
 // turn can be placed in a [Scaffold.body].
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+    userProvider.loadUserData();
+    final userData = userProvider.userData;
+    // print(userData);
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
@@ -44,8 +50,8 @@ class _SliverAppBarExampleState extends State<SliverAppBarExample> {
             expandedHeight: 180.0,
             backgroundColor: Colors.brown,
             flexibleSpace: FlexibleSpaceBar(
-              title: const Text(
-                "Hi, Calvin!",
+              title: Text(
+                "Hi, ${userData?['name']?.toString() ?? 'User'}",
                 style: TextStyle(color: Colors.white),
                 textAlign: TextAlign.center,
               ),
@@ -67,13 +73,7 @@ class _SliverAppBarExampleState extends State<SliverAppBarExample> {
                       onTap: () {
                         showDialog(
                             context: context,
-                            // builder: (context) => ResultPage(score: 85));
-                            builder: (context) => ProfilePage(
-                                  age: '19',
-                                  height: '175',
-                                  name: 'Calvin Sentosa',
-                                  weight: '98',
-                                ));
+                            builder: (context) => ProfilePage());
                       },
                       child: const CircleAvatar(
                         radius: 40,

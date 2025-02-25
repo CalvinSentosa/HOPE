@@ -1,14 +1,18 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-// import 'package:flutter_application_1/screens/profilepage.dart';
+
 import 'package:project_android_studio/Profile/camera.dart';
 import 'package:project_android_studio/Services/auth_services.dart';
-// import 'package:project_android_studio/Services/globals.dart';
+
 import 'package:intl/intl.dart';
+import 'package:project_android_studio/Services/provider.dart';
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class ProfilePage2 extends StatelessWidget {
+  //Atribut yang perlu diinput
   String email = '';
   String fullName = '';
   String dob = '';
@@ -16,6 +20,7 @@ class ProfilePage2 extends StatelessWidget {
   int weight = 0;
   int height = 0;
 
+  //Set controller
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _dobController = TextEditingController();
@@ -27,9 +32,16 @@ class ProfilePage2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+    final userData = userProvider.userData;
+    // print("Hasil userData: ${userData}");
     updateData() async {
       String fullName = _fullNameController.text;
-      String email = _emailController.text;
+
+      if (userProvider.userData == null) {
+        userProvider.loadUserData();
+      }
+      String email = '${userData?['email'] ?? 'Email kosong'}';
 
       final String dobText = _dobController.text;
       final DateFormat formatter = DateFormat('dd-MM-yyyy');
@@ -49,6 +61,15 @@ class ProfilePage2 extends StatelessWidget {
 
       if (response.statusCode == 200) {
         successSnackBar(context, "Data updated!");
+        userProvider.setUserData({
+          "name": fullName,
+          "email": email,
+          "gender": gender,
+          "dob": dob.toIso8601String(),
+          "weight": weight,
+          "height": height
+        });
+        print("Hasil userData: ${userData}");
       } else {
         Map<String, dynamic> responseMap = jsonDecode(response.body);
         String errorMessage =
@@ -77,7 +98,7 @@ class ProfilePage2 extends StatelessWidget {
                 border:
                     Border.all(color: Colors.white, width: 1), // Circle border
               ),
-              child: const Icon(Icons.arrow_back,
+              child: const Icon(CupertinoIcons.arrow_left,
                   color: Colors.black, size: 20), // Back arrow icon
             ),
           ),
@@ -171,7 +192,7 @@ class ProfilePage2 extends StatelessWidget {
                   ProfileInputField(
                     label: "Email Address",
                     icon: Icons.email,
-                    hintText: "Enter your email",
+                    hintText: "${userData?['email']}",
                     controller: _emailController, // Pass controller
                   ),
                   SizedBox(height: 16),
@@ -181,7 +202,7 @@ class ProfilePage2 extends StatelessWidget {
                         child: ProfileInputField(
                           label: "Date of Birth",
                           icon: Icons.calendar_today,
-                          hintText: "DD/MM/YYYY",
+                          hintText: "DD-MM-YYYY",
                           controller: _dobController, // Pass controller
                         ),
                       ),
@@ -260,13 +281,13 @@ class ProfileInputField extends StatelessWidget {
   final String label;
   final IconData icon;
   final String hintText;
-  final TextEditingController controller;
+  final TextEditingController? controller;
 
   const ProfileInputField({
     required this.label,
     required this.icon,
     required this.hintText,
-    required this.controller, // Added controller to allow text input
+    this.controller, // Added controller to allow text input
   });
 
   @override
