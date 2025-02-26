@@ -26,6 +26,7 @@ class SignUpPage extends StatelessWidget {
         _email = emailController.text;
         _password = passwordController.text;
         http.Response response = await AuthServices.register(_email, _password);
+        print("Raw API Response: ${response.statusCode}");
         Map responseMap = jsonDecode(response.body);
 
         if (response.statusCode == 200) {

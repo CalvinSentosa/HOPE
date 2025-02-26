@@ -90,7 +90,7 @@ class ProfilePage2 extends StatelessWidget {
               Navigator.pop(context); // Navigate back to the previous screen
             },
             child: Container(
-              width: 40, // Diameter of the circle
+              width: 40, // Diameter of the circle`
               height: 40, // Diameter of the circle
               decoration: BoxDecoration(
                 shape: BoxShape.circle,

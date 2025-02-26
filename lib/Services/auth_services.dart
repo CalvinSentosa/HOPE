@@ -10,7 +10,8 @@ class AuthServices {
       "password": password,
     };
     var body = json.encode(data);
-    var url = Uri.parse(baseURL + 'auth/register');
+    // var url = Uri.parse(baseURL + '/auth/register');
+    var url = Uri.parse(baseURL + '/register'); // Buat hp
     http.Response response = await http.post(
       url,
       headers: headers,
@@ -26,7 +27,8 @@ class AuthServices {
       "password": password,
     };
     var body = json.encode(data);
-    var url = Uri.parse(baseURL + 'auth/login');
+    // var url = Uri.parse(baseURL + '/auth/login');
+    var url = Uri.parse(baseURL + '/login');
     http.Response response = await http.post(
       url,
       headers: headers,
@@ -47,7 +49,8 @@ class AuthServices {
       "height": height
     };
     var body = json.encode(data);
-    var url = Uri.parse(baseURL + 'auth/updateData');
+    // var url = Uri.parse(baseURL + 'auth/updateData');
+    var url = Uri.parse(baseURL + '/updateData');
     http.Response response = await http.post(
       url,
       headers: headers,
