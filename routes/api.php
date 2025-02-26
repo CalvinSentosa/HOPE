@@ -3,6 +3,8 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\UserController;
+// use App\Models\User
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +21,11 @@ use Illuminate\Support\Facades\Route;
 Route::post('/auth/register', [AuthController::class, 'register']);
 Route::post('/auth/login', [AuthController::class, 'login']);
 Route::post('/auth/updateData',[AuthController::class, 'updateData']);
+
+
+Route::post('/register', [UserController::class, 'register']);
+Route::post('/login', [UserController::class, 'login']);
+Route::post('/updateData',[UserController::class, 'updateData']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
