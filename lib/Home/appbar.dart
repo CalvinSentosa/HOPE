@@ -3,10 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:project_android_studio/Home/article.dart';
+import 'package:project_android_studio/Home/home_page.dart';
 import 'package:project_android_studio/Profile/profilepage.dart';
 import 'package:project_android_studio/Services/provider.dart';
 import 'package:project_android_studio/Test/questionpage.dart';
-import 'package:project_android_studio/main.dart';
 import 'package:provider/provider.dart';
 
 /// Flutter code sample for [SliverAppBar].
@@ -26,12 +26,12 @@ class AppBarApp extends StatelessWidget {
 
 class SliverAppBarExample extends StatefulWidget {
   const SliverAppBarExample({super.key});
-
   @override
   State<SliverAppBarExample> createState() => _SliverAppBarExampleState();
 }
 
 class _SliverAppBarExampleState extends State<SliverAppBarExample> {
+  final GlobalKey<HomePageState> homePageKey = GlobalKey<HomePageState>();
   final bool _pinned = true;
   bool _isSubmitted = true;
 // [SliverAppBar]s are typically used in [CustomScrollView.slivers], which in
@@ -169,6 +169,7 @@ class _SliverAppBarExampleState extends State<SliverAppBarExample> {
                         ),
                       ),
                       GestureDetector(
+                        behavior: HitTestBehavior.translucent,
                         onTap: () {
                           homePageKey.currentState?.changeTab(1);
                         },
@@ -230,8 +231,12 @@ class _SliverAppBarExampleState extends State<SliverAppBarExample> {
                                       (MediaQuery.of(context).size.width / 2) -
                                           30,
                                   child: GestureDetector(
+                                    behavior: HitTestBehavior.translucent,
                                     onTap: () {
                                       homePageKey.currentState?.changeTab(1);
+                                      // showDialog(
+                                      //     context: context,
+                                      //     builder: (context) => ChatPage());
                                     },
                                     child: Container(
                                       padding: EdgeInsets.all(15),

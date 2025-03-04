@@ -1,13 +1,11 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-import 'package:project_android_studio/Home/appbar.dart';
+// import 'package:project_android_studio/Home/appbar.dart';
+import 'package:project_android_studio/Home/dashboard.dart';
 import 'package:project_android_studio/Test/testpage.dart';
 
 import '../Chatbot/chatbot.dart';
-// import 'package:project_android_studio/Test/resPage.dart';
-// import 'package:flutter_tester/test_heart/test_heart.dart';
 
 class HomePage extends StatefulWidget {
   final Function(int)? onTabChanged;
@@ -21,18 +19,21 @@ class HomePageState extends State<HomePage> {
   int page = 0;
   final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   List<Widget> body = [
-    const AppBarApp(),
+    // const AppBarApp(),
+    const Dashboard(),
     const ChatPage(),
     const TakePictureScreen(),
   ];
   void changeTab(int index) {
-    setState(() {
-      page = index;
-    });
+    if (mounted) {
+      setState(() {
+        page = index;
+      });
 
-    final navBarState = _bottomNavigationKey.currentState;
-    if (navBarState != null) {
-      navBarState.setPage(index);
+      final navBarState = _bottomNavigationKey.currentState;
+      if (navBarState != null) {
+        navBarState.setPage(index);
+      }
     }
   }
 

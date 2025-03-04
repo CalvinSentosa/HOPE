@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:project_android_studio/Profile/camera.dart';
+import 'package:project_android_studio/Profile/profilepage.dart';
 import 'package:project_android_studio/Services/auth_services.dart';
 
 import 'package:intl/intl.dart';
@@ -247,7 +248,10 @@ class ProfilePage2 extends StatelessWidget {
                         // Handle saving the profile data
 
                         updateData();
-
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProfilePage()));
                         // You can handle saving the data here
                         print(
                             'Saved Profile: $fullName, $email, $dob, $gender, $weight, $height');
