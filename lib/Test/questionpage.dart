@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_android_studio/Test/bpm_detector.dart';
 import 'package:project_android_studio/Test/resPage.dart';
 
 class QuestionPage extends StatefulWidget {
@@ -180,7 +181,13 @@ class _QuestionPageState extends State<QuestionPage> {
                       // Navigasi ke halaman berikutnya
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => DepressionResultPage(weeklyScores: [100, 75, 50, 25, 50, 75, 100])),
+                        MaterialPageRoute(builder: (context) => HeartBPMDetector(onBPMDetected: (bpm) {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => DepressionResultPage(weeklyScores: [100, 75, 50, 25, 50, 75, 100])),
+                          );
+                        })
+                        ),
                       );
                     },
                     child: const Text("Finish"),
