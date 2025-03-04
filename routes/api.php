@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\DataController;
 // use App\Models\User
 
 /*
@@ -27,6 +28,7 @@ Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/updateData',[UserController::class, 'updateData']);
 
+Route::get('/data',[DataController::class,'data']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
