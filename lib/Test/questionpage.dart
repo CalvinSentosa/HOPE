@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_android_studio/Test/bpm_detector.dart';
-import 'package:project_android_studio/Test/resPage.dart';
+import 'package:project_android_studio/Test/bpm_detector1.dart';
 
 class QuestionPage extends StatefulWidget {
   const QuestionPage({Key? key}) : super(key: key);
@@ -31,7 +30,8 @@ class _QuestionPageState extends State<QuestionPage> {
         foregroundColor: const Color(0xFF4F3422), // Menambahkan warna title
       ),
       body: SafeArea(
-        child: SingleChildScrollView(  // Membungkus dengan SingleChildScrollView
+        child: SingleChildScrollView(
+          // Membungkus dengan SingleChildScrollView
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -77,7 +77,8 @@ class _QuestionPageState extends State<QuestionPage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     _buildQuestionCard(
-                      questionText: "Little interest or pleasure in doing things",
+                      questionText:
+                          "Little interest or pleasure in doing things",
                       sliderValue: _currentSliderValue1,
                       onChanged: (value) {
                         setState(() {
@@ -97,7 +98,8 @@ class _QuestionPageState extends State<QuestionPage> {
                     ),
                     const SizedBox(height: 16),
                     _buildQuestionCard(
-                      questionText: "Trouble falling or staying asleep, or sleeping too much",
+                      questionText:
+                          "Trouble falling or staying asleep, or sleeping too much",
                       sliderValue: _currentSliderValue3,
                       onChanged: (value) {
                         setState(() {
@@ -127,7 +129,8 @@ class _QuestionPageState extends State<QuestionPage> {
                     ),
                     const SizedBox(height: 16),
                     _buildQuestionCard(
-                      questionText: "Feeling bad about yourself or that you are a failure or have let yourself or your family down",
+                      questionText:
+                          "Feeling bad about yourself or that you are a failure or have let yourself or your family down",
                       sliderValue: _currentSliderValue6,
                       onChanged: (value) {
                         setState(() {
@@ -137,7 +140,8 @@ class _QuestionPageState extends State<QuestionPage> {
                     ),
                     const SizedBox(height: 16),
                     _buildQuestionCard(
-                      questionText: "Trouble concentrating on things, such as reading the newspaper or watching television",
+                      questionText:
+                          "Trouble concentrating on things, such as reading the newspaper or watching television",
                       sliderValue: _currentSliderValue7,
                       onChanged: (value) {
                         setState(() {
@@ -147,7 +151,8 @@ class _QuestionPageState extends State<QuestionPage> {
                     ),
                     const SizedBox(height: 16),
                     _buildQuestionCard(
-                      questionText: "Moving or speaking so slowly that other people could have noticed. Or the opposite, being so fidgety or restless that you have been moving around a lot more than usual",
+                      questionText:
+                          "Moving or speaking so slowly that other people could have noticed. Or the opposite, being so fidgety or restless that you have been moving around a lot more than usual",
                       sliderValue: _currentSliderValue8,
                       onChanged: (value) {
                         setState(() {
@@ -157,7 +162,8 @@ class _QuestionPageState extends State<QuestionPage> {
                     ),
                     const SizedBox(height: 16),
                     _buildQuestionCard(
-                      questionText: "Thoughts that you would be better off dead, or of hurting yourself",
+                      questionText:
+                          "Thoughts that you would be better off dead, or of hurting yourself",
                       sliderValue: _currentSliderValue9,
                       onChanged: (value) {
                         setState(() {
@@ -167,7 +173,8 @@ class _QuestionPageState extends State<QuestionPage> {
                     ),
                     const SizedBox(height: 16),
                     _buildQuestionCard(
-                      questionText: "How often do you have trouble falling asleep or staying asleep?",
+                      questionText:
+                          "How often do you have trouble falling asleep or staying asleep?",
                       sliderValue: _currentSliderValue10,
                       onChanged: (value) {
                         setState(() {
@@ -175,31 +182,29 @@ class _QuestionPageState extends State<QuestionPage> {
                         });
                       },
                     ),
-                    const SizedBox(height: 32), // Memberikan ruang sebelum tombol
+                    const SizedBox(
+                        height: 32), // Memberikan ruang sebelum tombol
                     ElevatedButton(
-                    onPressed: () {
-                      // Navigasi ke halaman berikutnya
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => HeartBPMDetector(onBPMDetected: (bpm) {
-                          Navigator.pushReplacement(
+                      onPressed: () {
+                        // Navigasi ke halaman berikutnya
+                        Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => DepressionResultPage(weeklyScores: [100, 75, 50, 25, 50, 75, 100])),
-                          );
-                        })
+                            MaterialPageRoute(
+                                builder: (context) => HeartBPMDetector1(
+                                    onBPMDetected: (bpm) {})));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(
+                            0xFF9BB168), // Mengganti 'primary' dengan 'backgroundColor'
+                        foregroundColor: Colors
+                            .white, // Mengganti 'onPrimary' dengan 'foregroundColor'
+                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
                         ),
-                      );
-                    },
-                    child: const Text("Finish"),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF9BB168), // Mengganti 'primary' dengan 'backgroundColor'
-                      foregroundColor: Colors.white, // Mengganti 'onPrimary' dengan 'foregroundColor'
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
                       ),
-                    ),
-                  )
+                      child: const Text("Finish"),
+                    )
                   ],
                 ),
               ),
@@ -226,10 +231,10 @@ class _QuestionPageState extends State<QuestionPage> {
         children: [
           Text(
             questionText,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
-              color: const Color(0xFF4F3422), // Menambahkan warna teks
+              color: Color(0xFF4F3422), // Menambahkan warna teks
             ),
           ),
           const SizedBox(height: 16),
@@ -240,24 +245,28 @@ class _QuestionPageState extends State<QuestionPage> {
             label: sliderValue.round().toString(),
             onChanged: onChanged,
           ),
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
+            children: [
               Text(
                 "Not at all",
-                style: TextStyle(color: Color(0xFF4F3422)), // Menambahkan warna teks
+                style: TextStyle(
+                    color: Color(0xFF4F3422)), // Menambahkan warna teks
               ),
               Text(
                 "Several days",
-                style: TextStyle(color: Color(0xFF4F3422)), // Menambahkan warna teks
+                style: TextStyle(
+                    color: Color(0xFF4F3422)), // Menambahkan warna teks
               ),
               Text(
                 "More than half the days",
-                style: TextStyle(color: Color(0xFF4F3422)), // Menambahkan warna teks
+                style: TextStyle(
+                    color: Color(0xFF4F3422)), // Menambahkan warna teks
               ),
               Text(
                 "Nearly every day",
-                style: TextStyle(color: Color(0xFF4F3422)), // Menambahkan warna teks
+                style: TextStyle(
+                    color: Color(0xFF4F3422)), // Menambahkan warna teks
               ),
             ],
           )

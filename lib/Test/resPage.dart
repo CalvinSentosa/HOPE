@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:project_android_studio/Home/home_page.dart';
+import 'package:project_android_studio/main.dart';
 
 class DepressionResultPage extends StatelessWidget {
   final List<int?> weeklyScores;
@@ -34,7 +36,7 @@ class DepressionResultPage extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => HomePage(key: homePageKey),
         ),
         title: Text('Depression Score', style: TextStyle(color: Colors.white)),
       ),
@@ -153,14 +155,22 @@ class DepressionResultPage extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 24.0, vertical: 16.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: List.generate(7, (index) {
-                          final score = index < weeklyScores.length ? weeklyScores[index] : null;
-                          final barColor = score != null ? getDepressionDetails(score)['color'] as Color : Colors.grey;
-                          final barHeight = score != null ? ((score / 100) * maxHeight).clamp(0.0, maxHeight) : 10.0;
+                          final score = index < weeklyScores.length
+                              ? weeklyScores[index]
+                              : null;
+                          final barColor = score != null
+                              ? getDepressionDetails(score)['color'] as Color
+                              : Colors.grey;
+                          final barHeight = score != null
+                              ? ((score / 100) * maxHeight)
+                                  .clamp(0.0, maxHeight)
+                              : 10.0;
 
                           return Column(
                             mainAxisAlignment: MainAxisAlignment.end,
@@ -177,7 +187,15 @@ class DepressionResultPage extends StatelessWidget {
                               ),
                               SizedBox(height: 8),
                               Text(
-                                ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][index],
+                                [
+                                  "Mon",
+                                  "Tue",
+                                  "Wed",
+                                  "Thu",
+                                  "Fri",
+                                  "Sat",
+                                  "Sun"
+                                ][index],
                                 style: TextStyle(color: Colors.black),
                               ),
                             ],

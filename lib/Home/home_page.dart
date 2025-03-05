@@ -3,7 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // import 'package:project_android_studio/Home/appbar.dart';
 import 'package:project_android_studio/Home/dashboard.dart';
-import 'package:project_android_studio/Test/testpage.dart';
+import 'package:project_android_studio/Test/bpm_detector.dart';
+// import 'package:project_android_studio/Test/testpage.dart';
 
 import '../Chatbot/chatbot.dart';
 
@@ -22,7 +23,10 @@ class HomePageState extends State<HomePage> {
     // const AppBarApp(),
     const Dashboard(),
     const ChatPage(),
-    const TakePictureScreen(),
+    // const TakePictureScreen(),
+    HeartBPMDetector(
+      onBPMDetected: (int) {},
+    )
   ];
   void changeTab(int index) {
     if (mounted) {
