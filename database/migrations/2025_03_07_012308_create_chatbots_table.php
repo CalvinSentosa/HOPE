@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('depressions', function (Blueprint $table) {
+        Schema::create('chatbots', function (Blueprint $table) {
             $table->id();
-            $table->integer('DepressionScore');
-            $table->date('DateOfTest');
+            $table->string('UserText');
             $table->string('UserEmail');
             $table->foreign('UserEmail')->references('email')->on('users');
             $table->timestamps();
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Depression');
+        Schema::dropIfExists('chatbots');
     }
 };
