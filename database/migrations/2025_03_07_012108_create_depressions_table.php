@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('depressions', function (Blueprint $table) {
             $$table->id();
-            $table->integer('DepressionScore');
-            $table->date('DateOfTest');
+            $table->integer('depression_score');
+            $table->date('date_test');
             $table->string('UserEmail');
             $table->foreign('UserEmail')->references('email')->on('users');
             $table->timestamps();
