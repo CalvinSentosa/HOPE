@@ -17,7 +17,7 @@ class UserProvider with ChangeNotifier {
     String? userJson = prefs.getString("user_data");
     if (userJson != null) {
       _userData = jsonDecode(userJson);
-      // _userData = (await ApiService().fetchItems()) as Map<String, dynamic>?;
+      _userData = (await ApiService().fetchItems()) as Map<String, dynamic>?;
       notifyListeners(); // Memberi tahu UI untuk update
     }
   }

@@ -41,7 +41,7 @@ class LoginPage extends StatelessWidget {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           await prefs.setString("user_data", jsonEncode(userProvider.userData));
 
-          // Debugging (cek apakah email benar tersimpan)
+          // Debugging (cek email tersimpan ngga)
           // print("Email yang tersimpan: ${responseMap['user']['email']}");
           Navigator.push(
               context,

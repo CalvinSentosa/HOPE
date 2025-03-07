@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_android_studio/Home/home_page.dart';
 import 'package:project_android_studio/main.dart';
@@ -35,8 +36,15 @@ class DepressionResultPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => HomePage(key: homePageKey),
+          icon: Icon(CupertinoIcons.arrow_left, color: Colors.white),
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => HomePage(
+                          key: homePageKey,
+                        )));
+          },
         ),
         title: Text('Depression Score', style: TextStyle(color: Colors.white)),
       ),

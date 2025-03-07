@@ -59,4 +59,21 @@ class AuthServices {
     print(response.body);
     return response;
   }
+
+  static Future<http.Response> result(String email, int results) async {
+    Map data = {
+      "email": email,
+      "depression_score": results,
+    };
+
+    var body = json.encode(data);
+    var url = Uri.parse(baseURL + '/resultpage');
+    http.Response response = await http.post(
+      url,
+      headers: headers,
+      body: body,
+    );
+    print(response.body);
+    return response;
+  }
 }
