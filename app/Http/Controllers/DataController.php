@@ -8,9 +8,22 @@ use App\Models\User;
 
 class DataController extends Controller
 {
-    public function index()
+    public function data()
     {
         $items = User::all();
-        return response()->json($items);
+        if ($items->isEmpty()) {
+            return response()->json([
+                'message' => 'No users found',
+                'data' => []
+            ], 200);
+        }
+
+        return response()->json([
+            'message' => 'Users retrieved successfully',
+            'data' => $items
+        ], 200);
+
+
+
     }
 }
