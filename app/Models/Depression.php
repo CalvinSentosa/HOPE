@@ -10,7 +10,7 @@ class Depression extends Model
     /** @use HasFactory<\Database\Factories\DepressionFactory> */
     use HasFactory;
 
-    protected $table = 'depression';
+    protected $table = 'depressions';
 
     protected $fillable =[
         'depression_score',
