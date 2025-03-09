@@ -23,23 +23,6 @@ class QuestionPage extends StatefulWidget {
 // Buat function untuk menghitung skor PHQ-9
 class _QuestionPageState extends State<QuestionPage> {
   // String email = '';
-  String calculateDepressionScore(List<double> answers) {
-    // Konversi nilai slider ke skor PHQ-9
-    int totalScore = val.fold(0, (sum, vals) => sum + (vals.toInt() - 1));
-
-    // Menentukan kategori depresi berdasarkan skor
-    if (totalScore <= 4) {
-      return "Tidak ada/mild depression";
-    } else if (totalScore <= 9) {
-      return "Depresi ringan";
-    } else if (totalScore <= 14) {
-      return "Depresi sedang";
-    } else if (totalScore <= 19) {
-      return "Depresi cukup berat";
-    } else {
-      return "Depresi berat";
-    }
-  }
 
   int DepressionScore(List<double> answers) {
     // Konversi nilai slider ke skor PHQ-9
@@ -49,7 +32,16 @@ class _QuestionPageState extends State<QuestionPage> {
     return totalScore;
   }
 
-  double _currentValue = 1; // Nilai default slider
+  double _currentValue1 = 0;
+  double _currentValue2 = 0;
+  double _currentValue3 = 0;
+  double _currentValue4 = 0;
+  double _currentValue5 = 0;
+  double _currentValue6 = 0;
+  double _currentValue7 = 0;
+  double _currentValue8 = 0;
+  double _currentValue9 = 0;
+  double _currentValue10 = 0; // Nilai default slider
   List<double> val = List.filled(10, 1); // Menyimpan jawaban user
 
   void updateScore(int index, double value) {
@@ -57,12 +49,6 @@ class _QuestionPageState extends State<QuestionPage> {
       val[index] = value;
     });
   }
-
-  String submitAnswers() {
-    String results = calculateDepressionScore(val);
-    return results;
-  }
-
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
@@ -159,22 +145,22 @@ class _QuestionPageState extends State<QuestionPage> {
                     _buildQuestionCard(
                       questionText:
                           "Little interest or pleasure in doing things",
-                      sliderValue: _currentValue,
+                      sliderValue: _currentValue1,
                       onChanged: (value) {
                         setState(() {
-                          _currentValue = value;
-                          updateScore(1, _currentValue);
+                          _currentValue1 = value;
+                          updateScore(1, _currentValue1);
                         });
                       },
                     ),
                     const SizedBox(height: 16),
                     _buildQuestionCard(
                       questionText: "Feeling down, depressed, or hopeless",
-                      sliderValue: _currentValue,
+                      sliderValue: _currentValue2,
                       onChanged: (value) {
                         setState(() {
-                          _currentValue = value;
-                          updateScore(2, _currentValue);
+                          _currentValue2 = value;
+                          updateScore(2, _currentValue2);
                         });
                       },
                     ),
@@ -182,33 +168,33 @@ class _QuestionPageState extends State<QuestionPage> {
                     _buildQuestionCard(
                       questionText:
                           "Trouble falling or staying asleep, or sleeping too much",
-                      sliderValue: _currentValue,
+                      sliderValue: _currentValue3,
                       onChanged: (value) {
                         setState(() {
-                          _currentValue = value;
-                          updateScore(3, _currentValue);
+                          _currentValue3 = value;
+                          updateScore(3, _currentValue3);
                         });
                       },
                     ),
                     const SizedBox(height: 16),
                     _buildQuestionCard(
                       questionText: "Feeling tired or having little energy",
-                      sliderValue: _currentValue,
+                      sliderValue: _currentValue4,
                       onChanged: (value) {
                         setState(() {
-                          _currentValue = value;
-                          updateScore(4, _currentValue);
+                          _currentValue4 = value;
+                          updateScore(4, _currentValue4);
                         });
                       },
                     ),
                     const SizedBox(height: 16),
                     _buildQuestionCard(
                       questionText: "Poor appetite or overeating",
-                      sliderValue: _currentValue,
+                      sliderValue: _currentValue5,
                       onChanged: (value) {
                         setState(() {
-                          _currentValue = value;
-                          updateScore(5, _currentValue);
+                          _currentValue5 = value;
+                          updateScore(5, _currentValue5);
                         });
                       },
                     ),
@@ -216,11 +202,11 @@ class _QuestionPageState extends State<QuestionPage> {
                     _buildQuestionCard(
                       questionText:
                           "Feeling bad about yourself or that you are a failure or have let yourself or your family down",
-                      sliderValue: _currentValue,
+                      sliderValue: _currentValue6,
                       onChanged: (value) {
                         setState(() {
-                          _currentValue = value;
-                          updateScore(6, _currentValue);
+                          _currentValue6 = value;
+                          updateScore(6, _currentValue6);
                         });
                       },
                     ),
@@ -228,11 +214,11 @@ class _QuestionPageState extends State<QuestionPage> {
                     _buildQuestionCard(
                       questionText:
                           "Trouble concentrating on things, such as reading the newspaper or watching television",
-                      sliderValue: _currentValue,
+                      sliderValue: _currentValue7,
                       onChanged: (value) {
                         setState(() {
-                          _currentValue = value;
-                          updateScore(7, _currentValue);
+                          _currentValue7 = value;
+                          updateScore(7, _currentValue7);
                         });
                       },
                     ),
@@ -240,11 +226,11 @@ class _QuestionPageState extends State<QuestionPage> {
                     _buildQuestionCard(
                       questionText:
                           "Moving or speaking so slowly that other people could have noticed. Or the opposite, being so fidgety or restless that you have been moving around a lot more than usual",
-                      sliderValue: _currentValue,
+                      sliderValue: _currentValue8,
                       onChanged: (value) {
                         setState(() {
-                          _currentValue = value;
-                          updateScore(8, _currentValue);
+                          _currentValue8 = value;
+                          updateScore(8, _currentValue8);
                         });
                       },
                     ),
@@ -252,11 +238,11 @@ class _QuestionPageState extends State<QuestionPage> {
                     _buildQuestionCard(
                       questionText:
                           "Thoughts that you would be better off dead, or of hurting yourself",
-                      sliderValue: _currentValue,
+                      sliderValue: _currentValue9,
                       onChanged: (value) {
                         setState(() {
-                          _currentValue = value;
-                          updateScore(9, _currentValue);
+                          _currentValue9 = value;
+                          updateScore(9, _currentValue9);
                         });
                       },
                     ),
@@ -264,11 +250,11 @@ class _QuestionPageState extends State<QuestionPage> {
                     _buildQuestionCard(
                       questionText:
                           "How often do you have trouble falling asleep or staying asleep?",
-                      sliderValue: _currentValue,
+                      sliderValue: _currentValue10,
                       onChanged: (value) {
                         setState(() {
-                          _currentValue = value;
-                          updateScore(10, _currentValue);
+                          _currentValue10 = value;
+                          updateScore(10, _currentValue10);
                         });
                       },
                     ),
