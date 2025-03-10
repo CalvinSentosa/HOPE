@@ -1,7 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:project_android_studio/Home/home_page.dart';
 import 'dart:async';
 import 'package:project_android_studio/Test/questionPage.dart';
+import 'package:project_android_studio/main.dart';
 
 class HeartBPMDetector extends StatefulWidget {
   final Function(int) onBPMDetected;
@@ -64,7 +67,11 @@ class _HeartBPMDetectorState extends State<HeartBPMDetector> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Heart BPM Detector')),
+      appBar: AppBar(
+        // leading: IconButton(onPressed: (){
+        //   Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(key: homePageKey,)));
+        // }, icon: Icon(CupertinoIcons.arrow_left)),
+        title: Text('Heart BPM Detector')),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

@@ -223,7 +223,7 @@ class MoodCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(Icons.emoji_emotions, color: Colors.white, size: 24),
+              Icon(CupertinoIcons.graph_square_fill, color: Colors.white, size: 24),
               SizedBox(width: 8),
               Text(
                 "Depression Score",

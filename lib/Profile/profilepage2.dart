@@ -158,7 +158,7 @@ class ProfilePage2 extends StatelessWidget {
                             radius: 17,
                             backgroundColor: Colors.white,
                             child: IconButton(
-                              icon: Icon(Icons.camera_alt,
+                              icon: Icon(CupertinoIcons.camera,
                                   size: 16, color: Colors.black),
                               onPressed: () {
                                 Navigator.push(
@@ -185,14 +185,14 @@ class ProfilePage2 extends StatelessWidget {
                 children: [
                   ProfileInputField(
                     label: "Full Name",
-                    icon: Icons.person,
+                    icon: CupertinoIcons.person,
                     hintText: "Enter your name",
                     controller: _fullNameController, // Pass controller
                   ),
                   SizedBox(height: 16),
                   ProfileInputField(
                     label: "Email Address",
-                    icon: Icons.email,
+                    icon: CupertinoIcons.mail,
                     hintText: "${userData?['email']}",
                     controller: _emailController, // Pass controller
                   ),
@@ -202,7 +202,7 @@ class ProfilePage2 extends StatelessWidget {
                       Expanded(
                         child: ProfileInputField(
                           label: "Date of Birth",
-                          icon: Icons.calendar_today,
+                          icon: CupertinoIcons.calendar_today,
                           hintText: "DD-MM-YYYY",
                           controller: _dobController, // Pass controller
                         ),
@@ -211,7 +211,7 @@ class ProfilePage2 extends StatelessWidget {
                       Expanded(
                         child: ProfileInputField(
                           label: "Gender",
-                          icon: Icons.male,
+                          icon: CupertinoIcons.eyeglasses,
                           hintText: "Male/Female",
                           controller: _genderController, // Pass controller
                         ),
@@ -224,7 +224,7 @@ class ProfilePage2 extends StatelessWidget {
                       Expanded(
                         child: ProfileInputField(
                           label: "Weight",
-                          icon: Icons.monitor_weight,
+                          icon: CupertinoIcons.gauge,
                           hintText: "e.g., 62kg",
                           controller: _weightController, // Pass controller
                         ),
@@ -233,7 +233,7 @@ class ProfilePage2 extends StatelessWidget {
                       Expanded(
                         child: ProfileInputField(
                           label: "Height",
-                          icon: Icons.height,
+                          icon: CupertinoIcons.resize_v,
                           hintText: "e.g., 169cm",
                           controller: _heightController, // Pass controller
                         ),

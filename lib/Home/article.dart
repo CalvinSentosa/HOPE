@@ -1,7 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_android_studio/Articles/artmed.dart';
 import 'package:project_android_studio/Articles/artmusic.dart';
 import 'package:project_android_studio/Articles/thankful.dart';
+import 'package:project_android_studio/Home/home_page.dart';
+import 'package:project_android_studio/main.dart';
 
 class ArticlePage extends StatelessWidget {
   final List<Map<String, dynamic>> articles = [
@@ -36,6 +39,12 @@ class ArticlePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(CupertinoIcons.arrow_left, color: Colors.black),
+          onPressed: () {
+            Navigator.pop(context, MaterialPageRoute(builder: (context) => HomePage(key: homePageKey,)));
+          }
+        ),
         title: const Text('Mindful Articles'),
         backgroundColor: Colors.teal,
       ),

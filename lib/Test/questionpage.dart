@@ -42,7 +42,7 @@ class _QuestionPageState extends State<QuestionPage> {
   double _currentValue8 = 0;
   double _currentValue9 = 0;
   double _currentValue10 = 0; // Nilai default slider
-  List<double> val = List.filled(10, 1); // Menyimpan jawaban user
+  List<double> val = List.filled(11, 1); // Menyimpan jawaban user
 
   void updateScore(int index, double value) {
     setState(() {
@@ -85,7 +85,7 @@ class _QuestionPageState extends State<QuestionPage> {
         leading: IconButton(
           icon: Icon(CupertinoIcons.arrow_left, color: Colors.black),
           onPressed: () {
-            Navigator.push(
+            Navigator.pop(
                 context,
                 MaterialPageRoute(
                     builder: (context) => HomePage(
@@ -110,7 +110,7 @@ class _QuestionPageState extends State<QuestionPage> {
                       alignment: Alignment.center,
                       children: [
                         Icon(
-                          Icons.favorite,
+                          CupertinoIcons.heart_fill,
                           color: Colors.orange.shade100,
                           size: 100,
                         ),
