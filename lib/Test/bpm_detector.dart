@@ -6,7 +6,8 @@ import 'package:project_android_studio/Test/questionPage.dart';
 class HeartBPMDetector extends StatefulWidget {
   final Function(int) onBPMDetected;
 
-  const HeartBPMDetector({Key? key, required this.onBPMDetected}) : super(key: key);
+  const HeartBPMDetector({Key? key, required this.onBPMDetected})
+      : super(key: key);
 
   @override
   _HeartBPMDetectorState createState() => _HeartBPMDetectorState();
@@ -36,7 +37,7 @@ class _HeartBPMDetectorState extends State<HeartBPMDetector> {
   void _startBPMDetection() {
     if (_isDetecting) return;
     _isDetecting = true;
-    _timer = Timer(Duration(seconds: 10), () {
+    _timer = Timer(Duration(seconds: 5), () {
       setState(() {
         _bpm = _simulateBPMCalculation();
         _isDetecting = false;
@@ -44,13 +45,13 @@ class _HeartBPMDetectorState extends State<HeartBPMDetector> {
       widget.onBPMDetected(_bpm);
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => QuestionPage()),
+        MaterialPageRoute(builder: (context) => QuestionPage(bpm: _bpm)),
       );
     });
   }
 
   int _simulateBPMCalculation() {
-    return 75 + (DateTime.now().second % 20); // Simulasi BPM antara 75-95
+    return 75 + (DateTime.now().second % 60); // Simulasi BPM antara 75-95
   }
 
   @override
@@ -76,7 +77,10 @@ class _HeartBPMDetectorState extends State<HeartBPMDetector> {
           SizedBox(height: 20),
           Text('Detecting BPM...', style: TextStyle(fontSize: 18)),
           SizedBox(height: 20),
-          _bpm > 0 ? Text('BPM: $_bpm', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)) : Container(),
+          _bpm > 0
+              ? Text('BPM: $_bpm',
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold))
+              : Container(),
         ],
       ),
     );

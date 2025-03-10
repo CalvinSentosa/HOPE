@@ -37,7 +37,7 @@ class _HeartBPMDetectorState extends State<HeartBPMDetector1> {
   void _startBPMDetection() {
     if (_isDetecting) return;
     _isDetecting = true;
-    _timer = Timer(Duration(seconds: 10), () {
+    _timer = Timer(Duration(seconds: 5), () {
       setState(() {
         _bpm = _simulateBPMCalculation();
         _isDetecting = false;

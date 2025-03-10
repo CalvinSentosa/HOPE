@@ -6,7 +6,7 @@ import 'package:project_android_studio/Home/article.dart';
 import 'package:project_android_studio/Home/home_page.dart';
 import 'package:project_android_studio/Profile/profilepage.dart';
 import 'package:project_android_studio/Services/provider.dart';
-import 'package:project_android_studio/Test/questionpage.dart';
+import 'package:project_android_studio/Test/bpm_detector.dart';
 import 'package:provider/provider.dart';
 
 /// Flutter code sample for [SliverAppBar].
@@ -473,7 +473,8 @@ class PopUp extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => QuestionPage()));
+                                builder: (context) =>
+                                    HeartBPMDetector(onBPMDetected: (bpm) {})));
                       },
                       child: Text("Yuk isi tes!"),
                     )

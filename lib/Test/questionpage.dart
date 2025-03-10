@@ -1,33 +1,99 @@
+import 'dart:convert';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:project_android_studio/Home/home_page.dart';
+import 'package:project_android_studio/Profile/profilepage2.dart';
+import 'package:project_android_studio/Services/auth_services.dart';
+import 'package:project_android_studio/Services/provider.dart';
 import 'package:project_android_studio/Test/bpm_detector1.dart';
+import 'package:project_android_studio/main.dart';
+import 'package:provider/provider.dart';
 
 class QuestionPage extends StatefulWidget {
-  const QuestionPage({Key? key}) : super(key: key);
+  final int bpm;
+
+  const QuestionPage({super.key, required this.bpm});
 
   @override
   _QuestionPageState createState() => _QuestionPageState();
 }
 
+// Buat function untuk menghitung skor PHQ-9
 class _QuestionPageState extends State<QuestionPage> {
-  double _currentSliderValue1 = 0;
-  double _currentSliderValue2 = 0;
-  double _currentSliderValue3 = 0;
-  double _currentSliderValue4 = 0;
-  double _currentSliderValue5 = 0;
-  double _currentSliderValue6 = 0;
-  double _currentSliderValue7 = 0;
-  double _currentSliderValue8 = 0;
-  double _currentSliderValue9 = 0;
-  double _currentSliderValue10 = 0;
+  // String email = '';
 
+  int DepressionScore(List<double> answers) {
+    // Konversi nilai slider ke skor PHQ-9
+    int totalScore = val.fold(0, (sum, vals) => sum + (vals.toInt() - 1));
+
+    // Menentukan kategori depresi berdasarkan skor
+    return totalScore;
+  }
+
+  double _currentValue1 = 0;
+  double _currentValue2 = 0;
+  double _currentValue3 = 0;
+  double _currentValue4 = 0;
+  double _currentValue5 = 0;
+  double _currentValue6 = 0;
+  double _currentValue7 = 0;
+  double _currentValue8 = 0;
+  double _currentValue9 = 0;
+  double _currentValue10 = 0; // Nilai default slider
+  List<double> val = List.filled(10, 1); // Menyimpan jawaban user
+
+  void updateScore(int index, double value) {
+    setState(() {
+      val[index] = value;
+    });
+  }
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+    final userData = userProvider.userData;
+    result() async {
+      if (userProvider.userData == null) {
+        userProvider.loadUserData();
+      }
+      String email = '${userData?['email'] ?? 'Email kosong'}';
+      int depression_score = DepressionScore(val);
+
+      http.Response response =
+          await AuthServices.result(email, depression_score);
+
+      if (response.statusCode == 200) {
+        successSnackBar(context, "Data updated!");
+        userProvider.setUserData({
+          "userEmail": email,
+          "depression_score": depression_score,
+        });
+      } else {
+        Map<String, dynamic> responseMap = jsonDecode(response.body);
+        String errorMessage =
+            responseMap['message'] ?? 'Terjadi kesalahan, coba lagi.';
+        errorSnackBar(context, errorMessage);
+      }
+    }
+
     return Scaffold(
       backgroundColor: Color(0xFFF7F4F2),
       appBar: AppBar(
-        title: const Text("Question Page"),
-        backgroundColor: Color(0xFFF7F4F2),
-        foregroundColor: const Color(0xFF4F3422), // Menambahkan warna title
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(CupertinoIcons.arrow_left, color: Colors.black),
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => HomePage(
+                          key: homePageKey,
+                        )));
+          },
+        ),
+        title: Text('Question Page', style: TextStyle(color: Colors.black)),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -48,8 +114,8 @@ class _QuestionPageState extends State<QuestionPage> {
                           color: Colors.orange.shade100,
                           size: 100,
                         ),
-                        const Text(
-                          "60",
+                        Text(
+                          '${widget.bpm}',
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
@@ -79,20 +145,22 @@ class _QuestionPageState extends State<QuestionPage> {
                     _buildQuestionCard(
                       questionText:
                           "Little interest or pleasure in doing things",
-                      sliderValue: _currentSliderValue1,
+                      sliderValue: _currentValue1,
                       onChanged: (value) {
                         setState(() {
-                          _currentSliderValue1 = value;
+                          _currentValue1 = value;
+                          updateScore(1, _currentValue1);
                         });
                       },
                     ),
                     const SizedBox(height: 16),
                     _buildQuestionCard(
                       questionText: "Feeling down, depressed, or hopeless",
-                      sliderValue: _currentSliderValue2,
+                      sliderValue: _currentValue2,
                       onChanged: (value) {
                         setState(() {
-                          _currentSliderValue2 = value;
+                          _currentValue2 = value;
+                          updateScore(2, _currentValue2);
                         });
                       },
                     ),
@@ -100,30 +168,33 @@ class _QuestionPageState extends State<QuestionPage> {
                     _buildQuestionCard(
                       questionText:
                           "Trouble falling or staying asleep, or sleeping too much",
-                      sliderValue: _currentSliderValue3,
+                      sliderValue: _currentValue3,
                       onChanged: (value) {
                         setState(() {
-                          _currentSliderValue3 = value;
+                          _currentValue3 = value;
+                          updateScore(3, _currentValue3);
                         });
                       },
                     ),
                     const SizedBox(height: 16),
                     _buildQuestionCard(
                       questionText: "Feeling tired or having little energy",
-                      sliderValue: _currentSliderValue4,
+                      sliderValue: _currentValue4,
                       onChanged: (value) {
                         setState(() {
-                          _currentSliderValue4 = value;
+                          _currentValue4 = value;
+                          updateScore(4, _currentValue4);
                         });
                       },
                     ),
                     const SizedBox(height: 16),
                     _buildQuestionCard(
                       questionText: "Poor appetite or overeating",
-                      sliderValue: _currentSliderValue5,
+                      sliderValue: _currentValue5,
                       onChanged: (value) {
                         setState(() {
-                          _currentSliderValue5 = value;
+                          _currentValue5 = value;
+                          updateScore(5, _currentValue5);
                         });
                       },
                     ),
@@ -131,10 +202,11 @@ class _QuestionPageState extends State<QuestionPage> {
                     _buildQuestionCard(
                       questionText:
                           "Feeling bad about yourself or that you are a failure or have let yourself or your family down",
-                      sliderValue: _currentSliderValue6,
+                      sliderValue: _currentValue6,
                       onChanged: (value) {
                         setState(() {
-                          _currentSliderValue6 = value;
+                          _currentValue6 = value;
+                          updateScore(6, _currentValue6);
                         });
                       },
                     ),
@@ -142,10 +214,11 @@ class _QuestionPageState extends State<QuestionPage> {
                     _buildQuestionCard(
                       questionText:
                           "Trouble concentrating on things, such as reading the newspaper or watching television",
-                      sliderValue: _currentSliderValue7,
+                      sliderValue: _currentValue7,
                       onChanged: (value) {
                         setState(() {
-                          _currentSliderValue7 = value;
+                          _currentValue7 = value;
+                          updateScore(7, _currentValue7);
                         });
                       },
                     ),
@@ -153,10 +226,11 @@ class _QuestionPageState extends State<QuestionPage> {
                     _buildQuestionCard(
                       questionText:
                           "Moving or speaking so slowly that other people could have noticed. Or the opposite, being so fidgety or restless that you have been moving around a lot more than usual",
-                      sliderValue: _currentSliderValue8,
+                      sliderValue: _currentValue8,
                       onChanged: (value) {
                         setState(() {
-                          _currentSliderValue8 = value;
+                          _currentValue8 = value;
+                          updateScore(8, _currentValue8);
                         });
                       },
                     ),
@@ -164,21 +238,23 @@ class _QuestionPageState extends State<QuestionPage> {
                     _buildQuestionCard(
                       questionText:
                           "Thoughts that you would be better off dead, or of hurting yourself",
-                      sliderValue: _currentSliderValue9,
+                      sliderValue: _currentValue9,
                       onChanged: (value) {
                         setState(() {
-                          _currentSliderValue9 = value;
+                          _currentValue9 = value;
+                          updateScore(9, _currentValue9);
                         });
                       },
                     ),
                     const SizedBox(height: 16),
                     _buildQuestionCard(
                       questionText:
-                          "How often these problems made it difficult for you to do your work, take care of things at home, or get along with other people?",
-                      sliderValue: _currentSliderValue10,
+                          "How often do you have trouble falling asleep or staying asleep?",
+                      sliderValue: _currentValue10,
                       onChanged: (value) {
                         setState(() {
-                          _currentSliderValue10 = value;
+                          _currentValue10 = value;
+                          updateScore(10, _currentValue10);
                         });
                       },
                     ),
@@ -186,6 +262,7 @@ class _QuestionPageState extends State<QuestionPage> {
                         height: 32), // Memberikan ruang sebelum tombol
                     ElevatedButton(
                       onPressed: () {
+                        result();
                         // Navigasi ke halaman berikutnya
                         Navigator.push(
                             context,
@@ -221,6 +298,7 @@ class _QuestionPageState extends State<QuestionPage> {
     required ValueChanged<double> onChanged,
   }) {
     return Container(
+      width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: Colors.brown.shade100,
         borderRadius: BorderRadius.circular(12),
@@ -250,21 +328,25 @@ class _QuestionPageState extends State<QuestionPage> {
             children: [
               Text(
                 "Not at all",
+                // "1",
                 style: TextStyle(
                     color: Color(0xFF4F3422)), // Menambahkan warna teks
               ),
               Text(
-                "Several days",
+                // "Several days",
+                "2",
                 style: TextStyle(
                     color: Color(0xFF4F3422)), // Menambahkan warna teks
               ),
               Text(
-                "More than half the days",
+                // "More than half the days",
+                "3",
                 style: TextStyle(
                     color: Color(0xFF4F3422)), // Menambahkan warna teks
               ),
               Text(
                 "Nearly every day",
+                // "4",
                 style: TextStyle(
                     color: Color(0xFF4F3422)), // Menambahkan warna teks
               ),
