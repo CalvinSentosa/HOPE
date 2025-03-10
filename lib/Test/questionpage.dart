@@ -174,7 +174,7 @@ class _QuestionPageState extends State<QuestionPage> {
                     const SizedBox(height: 16),
                     _buildQuestionCard(
                       questionText:
-                          "How often do you have trouble falling asleep or staying asleep?",
+                          "How often these problems made it difficult for you to do your work, take care of things at home, or get along with other people?",
                       sliderValue: _currentSliderValue10,
                       onChanged: (value) {
                         setState(() {
