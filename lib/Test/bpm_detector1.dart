@@ -47,7 +47,7 @@ class _HeartBPMDetectorState extends State<HeartBPMDetector1> {
         context,
         MaterialPageRoute(
             builder: (context) => DepressionResultPage(
-                weeklyScores: const [100, 75, 50, 25, 50, 75, 100])),
+                // weeklyScores: const [100, 75, 50, 25, 50, 75, 100])),
       );
     });
   }

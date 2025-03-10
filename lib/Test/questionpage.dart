@@ -42,7 +42,7 @@ class _QuestionPageState extends State<QuestionPage> {
   double _currentValue8 = 0;
   double _currentValue9 = 0;
   double _currentValue10 = 0; // Nilai default slider
-  List<double> val = List.filled(10, 1); // Menyimpan jawaban user
+  List<double> val = List.filled(11, 1); // Menyimpan jawaban user
 
   void updateScore(int index, double value) {
     setState(() {
