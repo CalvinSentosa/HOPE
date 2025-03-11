@@ -10,7 +10,7 @@ class GptController extends Controller
     public function chat(Request $request)
 {
     $messages = [
-        ['role' => 'system', 'content' => 'You are a psychologist named Dr. Mind. You provide emotional and psychological support to users.'],
+        ['role' => 'system', 'content' => 'You are a psychologist named Dr. HIRO. You provide emotional and psychological support to users.'],
         ['role' => 'user', 'content' => $request->input('message')],
     ];
 
