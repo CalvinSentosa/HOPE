@@ -26,12 +26,11 @@ class DepressionResultPage extends StatelessWidget {
     print("Score: ${userData?['depression_Score']}");
     final depressionDetails = getDepressionDetails(userData?['depressionScore']);
     final backgroundColor = depressionDetails['color'] as Color;
-    final depressionCategory = depressionDetails['category'] as String;
 
     const double maxHeight = 180.0;
 
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: backgroundColor, // Fix backgroundColor reference
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -134,7 +133,7 @@ class DepressionResultPage extends StatelessWidget {
                       ),
                       SizedBox(height: 8),
                       Text(
-                        'You have $depressionCategory',
+                        'You have ${getDepressionDetails(userData?['depressionScore'] ?? 0)['category']}',
                         style: TextStyle(fontSize: 24, color: Colors.white),
                       ),
                     ],
@@ -177,15 +176,14 @@ class DepressionResultPage extends StatelessWidget {
                             return Center(child: Text('No data available'));
                           } else {
                             final depressionScores = snapshot.data as List<Map<String, dynamic>>;
+                            final recentScores = depressionScores.take(7).toList(); // Take 7 days of scores
                             return Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: List.generate(7, (index) {
-                                final scoreData = index < depressionScores.length
-                                    ? depressionScores[index]
-                                    : null;
-                                final score = scoreData != null ? scoreData['score'] : null;
-                                final date = scoreData != null ? scoreData['date'] : null;
+                                final scoreData = recentScores[index];
+                                final score = scoreData['score'];
+                                final date = scoreData['date'];
                                 final barColor = score != null
                                     ? getDepressionDetails(score)['color'] as Color
                                     : Colors.grey;
@@ -231,3 +229,21 @@ class DepressionResultPage extends StatelessWidget {
     );
   }
 }
+
+// perbaiki kesalahan berikut
+
+// Undefined name 'backgroundColor'.
+// Try correcting the name to one that is defined, or defining the name.dartundefined_identifier
+// Type: InvalidType
+
+
+// The getter 'depressionScore' isn't defined for the type 'Map<String, dynamic>'.
+// Try importing the library that defines 'depressionScore', correcting the name to the name of an existing getter, or defining a getter or field named 'depressionScore'.dartundefined_getter
+// Type: InvalidType
+
+
+// The property 'isEmpty' can't be unconditionally accessed because the receiver can be 'null'.
+// Try making the access conditional (using '?.') or adding a null check to the target ('!').dartunchecked_use_of_nullable_value
+// Type: InvalidType
+
+

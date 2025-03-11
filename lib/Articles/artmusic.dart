@@ -7,8 +7,16 @@ class MusicArticles extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFF7F4F2),
       appBar: AppBar(
-        title: Text('Music Therapy for Relaxation'),
+        backgroundColor: Colors.white,
+        title: Text(
+          'Music Therapy for Relaxation',
+          style: TextStyle(
+            color: Color(0xFF4F3422),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         leading: IconButton(
           icon: const Icon(CupertinoIcons.arrow_left,
                   color: Colors.black, size: 20),
@@ -67,7 +75,7 @@ class MusicArticles extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 12.0),
       child: Text(
         title,
-        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.teal),
+        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF9BB167)),
       ),
     );
   }

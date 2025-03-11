@@ -79,10 +79,16 @@ class HeartTestResultPage extends StatelessWidget {
               onPressed: () {
                 if (isLie) {
                   // Jika Lie, kembali ke halaman tes sebelumnya
-                  Navigator.pop(context); // Menavigasi kembali ke halaman sebelumnya
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => QuestionPage()), // Arahkan ke QuestionPage di sini
+                  );
                 } else {
                   // Jika Truth, lanjut ke halaman berikutnya
-                  Navigator.pushNamed(context, '/nextPage'); // Ganti '/nextPage' dengan rute halaman berikutnya yang sesuai
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ResPage()), // Arahkan ke ResPage di sini
+                  );
                 }
               },
               child: Text(
@@ -95,6 +101,36 @@ class HeartTestResultPage extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+// Halaman QuestionPage
+class QuestionPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Question Page'),
+      ),
+      body: Center(
+        child: Text('This is the Question Page'),
+      ),
+    );
+  }
+}
+
+// Halaman ResPage
+class ResPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Result Page'),
+      ),
+      body: Center(
+        child: Text('This is the Result Page'),
       ),
     );
   }

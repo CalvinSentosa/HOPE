@@ -10,6 +10,8 @@ import 'package:project_android_studio/Services/auth_services.dart';
 import 'package:intl/intl.dart';
 import 'package:project_android_studio/Services/provider.dart';
 import 'package:provider/provider.dart';
+import 'package:image_picker/image_picker.dart';
+
 
 // ignore: must_be_immutable
 class ProfilePage2 extends StatelessWidget {
@@ -29,7 +31,16 @@ class ProfilePage2 extends StatelessWidget {
   final TextEditingController _weightController = TextEditingController();
   final TextEditingController _heightController = TextEditingController();
 
+  final ImagePicker _picker = ImagePicker();
+
   ProfilePage2({super.key});
+
+  Future<void> _pickImage(BuildContext context) async {
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      print("Gambar dipilih: ${image.path}");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -166,11 +177,7 @@ class ProfilePage2 extends StatelessWidget {
                               icon: Icon(CupertinoIcons.camera,
                                   size: 16, color: Colors.black),
                               onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => CameraApp()),
-                                );
+                                _pickImage(context);
                               },
                             ),
                           ),

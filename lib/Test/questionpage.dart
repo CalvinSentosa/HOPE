@@ -80,12 +80,12 @@ class _QuestionPageState extends State<QuestionPage> {
     return Scaffold(
       backgroundColor: Color(0xFFF7F4F2),
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
           icon: Icon(CupertinoIcons.arrow_left, color: Colors.black),
           onPressed: () {
-            Navigator.pop(
+            Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                     builder: (context) => HomePage(
@@ -93,7 +93,13 @@ class _QuestionPageState extends State<QuestionPage> {
                         )));
           },
         ),
-        title: Text('Question Page', style: TextStyle(color: Colors.black)),
+        title: Text(
+          'Question Page',
+          style: TextStyle(
+            color: Color(0xFF4F3422),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(

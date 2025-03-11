@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_android_studio/Home/home_page.dart';
 import 'package:project_android_studio/Register/landing_pages.dart';
 import 'package:project_android_studio/Services/provider.dart';
+import 'package:project_android_studio/Test/resPage.dart';
 // import 'package:project_android_studio/Test/resPage.dart';
 import 'package:provider/provider.dart';
 // import 'Register/landing_pages.dart';
@@ -30,7 +31,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(useMaterial3: true),
       home: LandingPage1(),
       // home: HomePage(key: homePageKey),
+<<<<<<< HEAD
       // home: DepressionResultPage(weeklyScores: [null,12,14,20,27,3,10],),
+=======
+      // home: DepressionResultPage(),
+>>>>>>> 4a55b701eded6158cebd8975e35f616dad91aeec
 
     );
   }

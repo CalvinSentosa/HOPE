@@ -67,7 +67,8 @@ class _HeartBPMDetectorState extends State<HeartBPMDetector> {
     return Scaffold(
       backgroundColor: const Color(0xFFF7F4F2),
       appBar: AppBar(
-        backgroundColor: const Color(0xFFF7F4F2),
+        automaticallyImplyLeading: false, 
+        backgroundColor: Colors.white,
         // leading: IconButton(onPressed: (){
         //   Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(key: homePageKey,)));
         // }, icon: Icon(CupertinoIcons.arrow_left)),
