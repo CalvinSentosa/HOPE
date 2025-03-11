@@ -33,6 +33,26 @@ class DepressionController extends Controller
         return response()->json(['message' => 'Test result saved successfully']);
     }
 
+    public function getScores(Request $request)
+    {
+        $email = $request->query('email');
+
+        if (!$email) {
+            return response()->json(['error' => 'Email parameter is required'], 400);
+        }
+
+        $user = User::where('email', $email)->first();
+
+        if (!$user) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+
+        $scores = Depression::where('UserEmail', $email)
+            ->orderBy('date_test', 'desc')
+            ->get(['depression_score as score', 'date_test as date']);
+
+        return response()->json($scores);
+    }
     /**
      * Show the form for creating a new resource.
      */

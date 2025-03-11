@@ -50,4 +50,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function depressions(){
+        return $this->hasMany(Depression::class , "UserEmail", "email");
+    }
+
 }

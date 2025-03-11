@@ -10,7 +10,7 @@ class DataController extends Controller
 {
     public function data()
     {
-        $items = User::all();
+        $items = User::with('depressions')->get();
         if ($items->isEmpty()) {
             return response()->json([
                 'message' => 'No users found',
