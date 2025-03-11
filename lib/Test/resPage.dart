@@ -25,7 +25,6 @@ class DepressionResultPage extends StatelessWidget {
     final userData = userProvider.userData;
     final depressionDetails = getDepressionDetails(userData?['depressionScore']);
     final backgroundColor = depressionDetails['color'] as Color;
-    final depressionCategory = depressionDetails['category'] as String;
 
     const double maxHeight = 180.0;
 
