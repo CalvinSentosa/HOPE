@@ -2,8 +2,6 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
-import 'package:project_android_studio/Profile/camera.dart';
 import 'package:project_android_studio/Profile/profilepage.dart';
 import 'package:project_android_studio/Services/auth_services.dart';
 
@@ -46,14 +44,14 @@ class ProfilePage2 extends StatelessWidget {
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     final userData = userProvider.userData;
-    print("Hasil userData: ${userData?['user']?['email']}");
+    print("Hasil userData: ${userData}");
     updateData() async {
       String fullName = _fullNameController.text;
 
       if (userProvider.userData == null) {
         userProvider.loadUserData();
       }
-      String email = '${userData?['user']?['email'] ?? 'Email kosong'}';
+      String email = '${userData?['email'] ?? 'Email kosong'}';
 
       final String dobText = _dobController.text;
       final DateFormat formatter = DateFormat('dd-MM-yyyy');
@@ -205,7 +203,7 @@ class ProfilePage2 extends StatelessWidget {
                   ProfileInputField(
                     label: "Email Address",
                     icon: CupertinoIcons.mail,
-                    hintText: "${userData?['user']?['email']}",
+                    hintText: "${userData?['email']}",
                     controller: _emailController, // Pass controller
                   ),
                   SizedBox(height: 16),
