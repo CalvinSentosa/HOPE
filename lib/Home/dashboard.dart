@@ -147,8 +147,17 @@ class Dashboard extends StatelessWidget {
                                       left: 12, right: 12, top: 5),
                                   // padding: EdgeInsets.all(10),
                                   decoration: BoxDecoration(
-                                      color: Color(0xFF9BB167),
-                                      borderRadius: BorderRadius.circular(20)),
+                                    color: Color(0xFF9BB167),
+                                    borderRadius: BorderRadius.circular(20),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.5), // Warna bayangan dengan transparansi
+                                        spreadRadius: 2, // Seberapa jauh bayangan menyebar
+                                        blurRadius: 6, // Seberapa blur bayangannya
+                                        offset: Offset(-1, 3), // Posisi bayangan (X, Y)
+                                      ),
+                                    ],
+                                  ),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
