@@ -73,7 +73,7 @@ class _ChatPageState extends State<ChatPage> {
                 Text(
                   "HIRO",
                   style: TextStyle(
-                    color: Color(0xFF9BB167),
+                    color: Color(0xFF4F3422), // Warna teks HIRO
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                   ),
