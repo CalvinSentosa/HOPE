@@ -37,6 +37,8 @@ Route::post('/chat', [GPTController::class, 'chat']);
 
 Route::get('/data',[DataController::class,'data']);
 
+Route::get('/resultpages',[DepressionController::class,'getScores']);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
