@@ -51,7 +51,7 @@ class Dashboard extends StatelessWidget {
                         children: [
                           Text(
                             "Hi, ${userData?['name']?.toString() ?? 'User'}",
-                            style: TextStyle(color: Colors.white, fontSize: 20),
+                            style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
                             textAlign: TextAlign.end,
                           ),
                           Row(
