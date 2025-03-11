@@ -91,7 +91,7 @@ class _MeditationVideoPageState extends State<MeditationVideoPage> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(Icons.circle, size: 8, color: Colors.black54),
+          const Icon(CupertinoIcons.circle, size: 8, color: Colors.black54),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
@@ -110,7 +110,7 @@ class _MeditationVideoPageState extends State<MeditationVideoPage> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(Icons.check_circle, size: 20, color: Colors.teal),
+          const Icon(CupertinoIcons.check_mark_circled, size: 20, color: Color(0xFF9BB167)),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
