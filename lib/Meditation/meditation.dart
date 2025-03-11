@@ -47,12 +47,12 @@ class _MeditationVideoPageState extends State<MeditationVideoPage> {
             _bulletPoint("Meningkatkan kualitas tidur"),
             _bulletPoint("Meningkatkan kesehatan jantung dan tekanan darah"),
             _sectionTitle("Langkah-langkah Meditasi"),
-            _step("1. Cari tempat yang tenang dan nyaman."),
-            _step("2. Duduk dengan posisi yang nyaman, punggung tegak namun rileks."),
-            _step("3. Tutup mata dan fokus pada pernapasan."),
-            _step("4. Biarkan pikiran mengalir tanpa menahan atau menghakimi."),
-            _step("5. Jika pikiran mulai mengembara, kembalikan fokus pada napas."),
-            _step("6. Lakukan meditasi selama 5-15 menit sesuai kenyamanan."),
+            _step("Cari tempat yang tenang dan nyaman."),
+            _step("Duduk dengan posisi yang nyaman, punggung tegak namun rileks."),
+            _step("Tutup mata dan fokus pada pernapasan."),
+            _step("Biarkan pikiran mengalir tanpa menahan atau menghakimi."),
+            _step("Jika pikiran mulai mengembara, kembalikan fokus pada napas."),
+            _step("Lakukan meditasi selama 5-15 menit sesuai kenyamanan."),
             const SizedBox(height: 20),
             const Text(
               "Terinspirasi dari ajaran Gurudev Sri Sri Ravi Shankar",
@@ -91,7 +91,7 @@ class _MeditationVideoPageState extends State<MeditationVideoPage> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(CupertinoIcons.circle, size: 8, color: Colors.black54),
+          const Icon(CupertinoIcons.circle, size: 8, color: Color(0xFF4F3422)),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
@@ -110,7 +110,7 @@ class _MeditationVideoPageState extends State<MeditationVideoPage> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(CupertinoIcons.check_mark_circled, size: 20, color: Color(0xFF9BB167)),
+          const Icon(CupertinoIcons.check_mark_circled, size: 20, color: Color(0xFF4F3422)),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
