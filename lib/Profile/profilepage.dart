@@ -78,7 +78,8 @@ class ProfilePage extends StatelessWidget {
                         ),
                         child: CircleAvatar(
                           radius: 50,
-                          backgroundColor: Colors.blue,
+                          backgroundImage: AssetImage(
+                                        'assets/user_profile.png'),
                         ),
                       ),
                       Positioned(

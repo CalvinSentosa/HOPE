@@ -68,7 +68,7 @@ class Dashboard extends StatelessWidget {
                                   child: const CircleAvatar(
                                     radius: 40,
                                     backgroundImage: AssetImage(
-                                        'assets/Profile_test.jpg'), // Replace with your asset
+                                        'assets/user_profile.png'), // Replace with your asset
                                   ),
                                 ),
                               ),
