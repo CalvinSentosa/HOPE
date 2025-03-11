@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:video_player/video_player.dart';
 
 class MeditationVideoPage extends StatefulWidget {
   const MeditationVideoPage({super.key});
@@ -10,23 +9,7 @@ class MeditationVideoPage extends StatefulWidget {
 }
 
 class _MeditationVideoPageState extends State<MeditationVideoPage> {
-  late VideoPlayerController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = VideoPlayerController.asset("assets/meditation_video.mp4")
-      ..initialize().then((_) {
-        setState(() {});
-      });
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,33 +36,16 @@ class _MeditationVideoPageState extends State<MeditationVideoPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AspectRatio(
-              aspectRatio: _controller.value.aspectRatio,
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  VideoPlayer(_controller),
-                  if (!_controller.value.isPlaying)
-                    IconButton(
-                      icon: const Icon(Icons.play_arrow, size: 50, color: Colors.white),
-                      onPressed: () {
-                        setState(() {
-                          _controller.play();
-                        });
-                      },
-                    ),
-                ],
-              ),
-            ),
+            const SizedBox(height: 10),
+            Image.asset('assets/meditation_thumbnail.png'),
             const SizedBox(height: 10),
             _sectionTitle("Manfaat Meditasi"),
-            _paragraph("Meditasi memiliki berbagai manfaat bagi kesehatan mental dan fisik. Beberapa manfaat utama meditasi meliputi:")
-            ,_bulletPoint("Mengurangi stres dan kecemasan")
-            ,_bulletPoint("Meningkatkan konsentrasi dan fokus")
-            ,_bulletPoint("Membantu mengontrol emosi")
-            ,_bulletPoint("Meningkatkan kualitas tidur")
-            ,_bulletPoint("Meningkatkan kesehatan jantung dan tekanan darah")
-            ,
+            _paragraph("Meditasi memiliki berbagai manfaat bagi kesehatan mental dan fisik. Beberapa manfaat utama meditasi meliputi:"),
+            _bulletPoint("Mengurangi stres dan kecemasan"),
+            _bulletPoint("Meningkatkan konsentrasi dan fokus"),
+            _bulletPoint("Membantu mengontrol emosi"),
+            _bulletPoint("Meningkatkan kualitas tidur"),
+            _bulletPoint("Meningkatkan kesehatan jantung dan tekanan darah"),
             _sectionTitle("Langkah-langkah Meditasi"),
             _step("1. Cari tempat yang tenang dan nyaman."),
             _step("2. Duduk dengan posisi yang nyaman, punggung tegak namun rileks."),
