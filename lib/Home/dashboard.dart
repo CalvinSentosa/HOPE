@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:project_android_studio/Home/article.dart';
 import 'package:project_android_studio/Home/home_page.dart';
+import 'package:project_android_studio/Meditation/meditation.dart';
 import 'package:project_android_studio/Profile/profilepage.dart';
 import 'package:project_android_studio/Services/provider.dart';
 import 'package:project_android_studio/Test/bpm_detector.dart';
@@ -248,12 +249,19 @@ class Dashboard extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
+                                GestureDetector(
+                                  onTap: () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => MeditationVideoPage())),
+                                  child: 
                                 ActivityCard(
                                   title: 'Daily Meditation',
                                   icon: Icon(
                                     FontAwesome.leaf,
                                     color: Colors.green,
                                   ),
+                                ),
                                 ),
                                 ActivityCard(
                                   title: 'Gratefulness Journaling',
