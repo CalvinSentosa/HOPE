@@ -23,6 +23,7 @@ class DepressionResultPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     final userData = userProvider.userData;
+    print("Score: ${userData?['depression_Score']}");
     final depressionDetails = getDepressionDetails(userData?['depressionScore']);
     final backgroundColor = depressionDetails['color'] as Color;
     final depressionCategory = depressionDetails['category'] as String;

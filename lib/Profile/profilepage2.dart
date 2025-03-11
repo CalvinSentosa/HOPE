@@ -35,14 +35,14 @@ class ProfilePage2 extends StatelessWidget {
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     final userData = userProvider.userData;
-    // print("Hasil userData: ${userData}");
+    print("Hasil userData: ${userData?['user']?['email']}");
     updateData() async {
       String fullName = _fullNameController.text;
 
       if (userProvider.userData == null) {
         userProvider.loadUserData();
       }
-      String email = '${userData?['email'] ?? 'Email kosong'}';
+      String email = '${userData?['user']?['email'] ?? 'Email kosong'}';
 
       final String dobText = _dobController.text;
       final DateFormat formatter = DateFormat('dd-MM-yyyy');
@@ -198,7 +198,7 @@ class ProfilePage2 extends StatelessWidget {
                   ProfileInputField(
                     label: "Email Address",
                     icon: CupertinoIcons.mail,
-                    hintText: "${userData?['email']}",
+                    hintText: "${userData?['user']?['email']}",
                     controller: _emailController, // Pass controller
                   ),
                   SizedBox(height: 16),
