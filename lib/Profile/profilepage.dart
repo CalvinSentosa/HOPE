@@ -218,7 +218,7 @@ class MoodCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Color(0xFFF4A560),
+        color: Color(0xFF9BB167),
         borderRadius: BorderRadius.circular(16),
       ),
       width: 300,
@@ -246,8 +246,8 @@ class MoodCard extends StatelessWidget {
             children: [
               MoodBar(day: "Sun", color: Colors.green, fillHeight: 80),
               MoodBar(day: "Mon", color: Colors.green, fillHeight: 90),
-              MoodBar(day: "Tue", color: Colors.yellow, fillHeight: 60),
-              MoodBar(day: "Wed", color: Colors.red, fillHeight: 30),
+              MoodBar(day: "Tue", color: Color(0xFFED7E1C), fillHeight: 60),
+              MoodBar(day: "Wed", color: Color(0xFFF44343), fillHeight: 30),
               MoodBar(day: "Thu", color: Colors.grey, fillHeight: 0),
               MoodBar(day: "Fri", color: Colors.grey, fillHeight: 0),
               MoodBar(day: "Sat", color: Colors.grey, fillHeight: 0),
@@ -281,7 +281,7 @@ class MoodBar extends StatelessWidget {
               width: 10,
               height: 100,
               decoration: BoxDecoration(
-                color: Colors.grey,
+                color: Color(0xFFE8DDD9),
                 borderRadius: BorderRadius.circular(5),
               ),
             ),

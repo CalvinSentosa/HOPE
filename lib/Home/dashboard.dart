@@ -35,7 +35,7 @@ class Dashboard extends StatelessWidget {
                           top: 45, right: 10, left: 10, bottom: 20),
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
-                          color: Colors.brown,
+                          color: Color(0xFF4F3422),
                           borderRadius: BorderRadius.only(
                               bottomRight: Radius.circular(40),
                               bottomLeft: Radius.circular(40)),
@@ -90,7 +90,7 @@ class Dashboard extends StatelessWidget {
                                     Row(
                                       children: [
                                         Text(
-                                          'Happy 😊',
+                                          'Depression Score',
                                           style: TextStyle(color: Colors.white),
                                         ),
                                         SizedBox(width: 10),
@@ -104,27 +104,6 @@ class Dashboard extends StatelessWidget {
                                         SizedBox(width: 10),
                                         Text(
                                           '80%',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          'Sleep 😴',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                        SizedBox(width: 10),
-                                        Expanded(
-                                          child: LinearProgressIndicator(
-                                            value: 0.3 * 2, // 60% progress
-                                            backgroundColor: Colors.white24,
-                                            color: Colors.greenAccent,
-                                          ),
-                                        ),
-                                        SizedBox(width: 10),
-                                        Text(
-                                          '60%',
                                           style: TextStyle(color: Colors.white),
                                         ),
                                       ],
@@ -149,7 +128,7 @@ class Dashboard extends StatelessWidget {
                           child: Text(
                             'AI Therapy Chatbot',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 18),
+                                fontWeight: FontWeight.bold, fontSize: 18, color: Color(0xFF4F3422)),
                             textAlign: TextAlign.left,
                           ),
                         ),
@@ -244,7 +223,7 @@ class Dashboard extends StatelessWidget {
                             child: Text(
                               'Suggested Activity',
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 18),
+                                  fontWeight: FontWeight.bold, fontSize: 18, color: Color(0xFF4F3422)),
                             ),
                           ),
                         ),
@@ -315,7 +294,8 @@ class Dashboard extends StatelessWidget {
                                   'Mindful Articles',
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 18),
+                                      fontSize: 18,
+                                      color: Color(0xFF4F3422)),
                                 ),
                               ),
                               TextButton(
