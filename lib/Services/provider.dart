@@ -6,8 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 // const String baseURL = "http://172.17.0.1:8000/api"; //docker localhost
 // const String baseURL = "https://763b-182-2-142-170.ngrok-free.app/api"; // Bisa diakses dari HP
-const String baseURL = "http://127.0.0.1:8000/api"; //chrome localhost
-// const String baseURL = "http://10.0.2.2:8000/api"; //emulator localhost
+// const String baseURL = "http://127.0.0.1:8000/api"; //chrome localhost
+const String baseURL = "http://10.0.2.2:8000/api"; //emulator localhost
 // const String baseURL = "http://192.168.104.103:8000/api";
 
 
@@ -50,7 +50,7 @@ class UserProvider with ChangeNotifier {
   final userData = jsonDecode(userJson);
   final email = userData['email'];
 
-  final url = Uri.parse(baseURL+ '/resultpage?email=$email');
+  final url = Uri.parse(baseURL+ '/resultpages?email=$email');
   final response = await http.get(url);
 
   if (response.statusCode == 200) {

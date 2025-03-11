@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_android_studio/Home/home_page.dart';
-// import 'package:project_android_studio/Register/landing_pages.dart';
+import 'package:project_android_studio/Register/landing_pages.dart';
 import 'package:project_android_studio/Services/provider.dart';
 // import 'package:project_android_studio/Test/resPage.dart';
 // import 'package:project_android_studio/Test/resPage.dart';
@@ -29,8 +29,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(useMaterial3: true),
-      //  home: LandingPage1(),
-      home: HomePage(key: homePageKey),
+      home: LandingPage1(),
+      //home: HomePage(key: homePageKey),
       // home: DepressionResultPage(),
 
     );
