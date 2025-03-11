@@ -14,7 +14,13 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   final ChatUser _currentUser = ChatUser(id: '1', firstName: 'You');
   final ChatUser _gptUser = ChatUser(id: '2', firstName: 'GPT');
-  List<ChatMessage> _messages = [];
+  List<ChatMessage> _messages = [
+    ChatMessage(
+    user: ChatUser(id: '2', firstName: 'GPT'),
+    createdAt: DateTime.now(),
+    text: "Hello! My name is Dr. Mind, a psychologist here to support you. How can I help you today?",
+  ),
+  ];
 
   Future<void> sendMessage(ChatMessage message) async {
     setState(() {
