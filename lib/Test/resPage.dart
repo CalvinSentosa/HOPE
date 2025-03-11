@@ -23,7 +23,10 @@ class DepressionResultPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     final userData = userProvider.userData;
-    final depressionDetails = getDepressionDetails(userData?['depressionScore']);
+    print("Score: ${userData?['depression_score']}");
+    print("Score: ${userData}");
+    // final int? score = userData?['depression_score'];
+    final depressionDetails = getDepressionDetails(userData?['depression_score']);
     final backgroundColor = depressionDetails['color'] as Color;
 
     const double maxHeight = 180.0;

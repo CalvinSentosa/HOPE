@@ -44,7 +44,7 @@ class ProfilePage2 extends StatelessWidget {
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     final userData = userProvider.userData;
-    // print("Hasil userData: ${userData}");
+    print("Hasil userData: ${userData}");
     updateData() async {
       String fullName = _fullNameController.text;
 
