@@ -307,7 +307,7 @@ class Dashboard extends StatelessWidget {
                                 },
                                 child: Text(
                                   'See All',
-                                  style: TextStyle(color: Color(0xFF4F3422)),
+                                  style: TextStyle(color: Color(0xFFED7E1C)),
                                 ),
                               ),
                             ],
@@ -345,16 +345,34 @@ class Dashboard extends StatelessWidget {
                                       fit: BoxFit.cover,
                                     ),
                                   ),
-                                  const Padding(
-                                    padding: EdgeInsets.all(16.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                            'Healing Minds: Exploring the Path'),
-                                        Icon(CupertinoIcons.arrow_right),
-                                      ],
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white, // Warna latar putih
+                                      borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(16.0), // Ubah sesuai kebutuhan
+                                        bottomRight: Radius.circular(16.0), 
+                                      ),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(16.0),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'Healing Minds: Exploring the Path',
+                                            style: TextStyle(
+                                              color: Color(0xFF4F3422),
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16.0,
+                                            ),
+                                          ),
+                                          Icon(
+                                            CupertinoIcons.arrow_right_circle_fill,
+                                            color: Color(0xFFED7E1C),
+                                            size: 24.0,
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   )
                                 ],
