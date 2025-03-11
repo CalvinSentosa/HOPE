@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:dash_chat_2/dash_chat_2.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:project_android_studio/Services/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -13,12 +14,12 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   final ChatUser _currentUser = ChatUser(id: '1', firstName: 'You');
-  final ChatUser _gptUser = ChatUser(id: '2', firstName: 'GPT');
+  final ChatUser _gptUser = ChatUser(id: '2', firstName: 'HIRO');
   List<ChatMessage> _messages = [
     ChatMessage(
-    user: ChatUser(id: '2', firstName: 'GPT'),
+    user: ChatUser(id: '2', firstName: 'HIRO'),
     createdAt: DateTime.now(),
-    text: "Hello! My name is Dr. Mind, a psychologist here to support you. How can I help you today?",
+    text: "Hello! My name is HIRO, I am your personal mental health care companion. How can I help you today?",
   ),
   ];
 
@@ -54,11 +55,19 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Chat with GPT")),
+      appBar: AppBar(automaticallyImplyLeading: false, title: const Text("Chat with HIRO")),
       body: DashChat(
         currentUser: _currentUser,
         onSend: sendMessage,
         messages: _messages,
+        inputOptions: InputOptions(
+          sendButtonBuilder: (void Function()? onSend) {
+            return IconButton(
+              icon: Icon(CupertinoIcons.paperplane, color: Color(0xFF9BB167),), // Change the icon and color
+              onPressed: onSend,
+            );
+          },
+        ),
       ),
     );
   }
