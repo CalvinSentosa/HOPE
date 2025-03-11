@@ -62,9 +62,9 @@ class Dashboard extends StatelessWidget {
                                 margin: EdgeInsets.only(right: 10),
                                 child: GestureDetector(
                                   onTap: () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) => ProfilePage());
+                                   Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => ProfilePage()));
                                   },
                                   child: const CircleAvatar(
                                     radius: 40,

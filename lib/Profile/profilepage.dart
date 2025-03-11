@@ -13,8 +13,8 @@ class ProfilePage extends StatelessWidget {
     final userData = userProvider.userData;
     // print("Name: $name");
     return Scaffold(
-      backgroundColor: const Color(0xFFF7F4F2),
       extendBodyBehindAppBar: true,
+      backgroundColor: const Color(0xFFF7F4F2),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
