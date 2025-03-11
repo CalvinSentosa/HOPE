@@ -18,7 +18,7 @@ class _ChatPageState extends State<ChatPage> {
     ChatMessage(
     user: ChatUser(id: '2', firstName: 'GPT'),
     createdAt: DateTime.now(),
-    text: "Hello! My name is Dr. Mind, a psychologist here to support you. How can I help you today?",
+    text: "Hello! My name is HIRO, I am your personal mental health care companion. How can I help you today?",
   ),
   ];
 
