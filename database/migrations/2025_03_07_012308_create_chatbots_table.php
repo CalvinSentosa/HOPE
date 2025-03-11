@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('UserText');
             $table->string('UserEmail');
             $table->foreign('UserEmail')->references('email')->on('users');
+            $table->boolean('isUser')->default(true);
             $table->timestamps();
         });
     }

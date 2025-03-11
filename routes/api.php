@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\DataController;
 use App\Http\Controllers\DepressionController;
+use App\Http\Controllers\GPTController;
+
 // use App\Models\User
 
 /*
@@ -31,6 +33,7 @@ Route::post('/updateData',[UserController::class, 'updateData']);
 
 Route::post('/resultpage', [DepressionController::class, 'result']);
 
+Route::post('/chat', [GPTController::class, 'chat']);
 
 Route::get('/data',[DataController::class,'data']);
 
