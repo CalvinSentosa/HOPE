@@ -31,12 +31,15 @@ class _ChatPageState extends State<ChatPage>{
   @override
   Widget build (BuildContext context){
     return Scaffold(
+      backgroundColor: const Color(0xFFF7F4F2),
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(0, 126, 126, 1),
+        backgroundColor: Colors.white,
+        automaticallyImplyLeading: false,
         title: const Text(
           'Hiro Chatbot',
           style: TextStyle(
-            color: Colors.white,
+            color: const Color(0xFF4F3422),
+            fontWeight: FontWeight.bold, 
           ),
         ),
       ),
@@ -47,6 +50,18 @@ class _ChatPageState extends State<ChatPage>{
           currentUserContainerColor: Colors.black,
           containerColor: Color.fromRGBO(0, 166,126, 1),
           textColor: Colors.white,
+        ),
+        inputOptions: InputOptions(
+          inputDecoration: InputDecoration(
+            filled: true,
+            fillColor: Colors.white,  // Ubah latar belakang kolom input menjadi putih
+            hintText: "Write a message...",
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),  // Opsional: Untuk tampilan lebih rounded
+              borderSide: BorderSide.none, // Menghilangkan border luar
+            ),
+            contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12), // Menyesuaikan padding agar lebih nyaman
+          ),
         ),
         onSend: (ChatMessage m){
           getChatResponse(m);

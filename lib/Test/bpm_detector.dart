@@ -67,11 +67,19 @@ class _HeartBPMDetectorState extends State<HeartBPMDetector> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFF7F4F2),
       appBar: AppBar(
+        backgroundColor: const Color(0xFFF7F4F2),
         // leading: IconButton(onPressed: (){
         //   Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(key: homePageKey,)));
         // }, icon: Icon(CupertinoIcons.arrow_left)),
-        title: Text('Heart BPM Detector')),
+        title: const Text(
+          'Heart BPM Detector',
+          style: TextStyle(
+            color: Color(0xFF4F3422),
+            fontWeight: FontWeight.bold, // Membuat teks menjadi tebal (bold)
+          ),
+        )),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

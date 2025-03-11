@@ -29,4 +29,13 @@ class UserProvider with ChangeNotifier {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString("user_data", jsonEncode(newUserData));
   }
+
+  Future<void> getDepressionScores() async {
+    //  _userData = newUserData;
+    // notifyListeners(); // Update UI
+
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // await prefs.setString("user_data", jsonEncode(newUserData));
+  }
+
 }

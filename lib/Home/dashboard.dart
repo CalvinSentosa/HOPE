@@ -24,6 +24,7 @@ class Dashboard extends StatelessWidget {
         //   title: Text("HOPE"),
         //   backgroundColor: Colors.brown,
         // ),
+        backgroundColor: const Color(0xFFF7F4F2),
         body: Container(
             width: double.infinity,
             child: SingleChildScrollView(
@@ -324,7 +325,10 @@ class Dashboard extends StatelessWidget {
                                       MaterialPageRoute(
                                           builder: (context) => ArticlePage()));
                                 },
-                                child: Text('See All'),
+                                child: Text(
+                                  'See All',
+                                  style: TextStyle(color: Color(0xFF4F3422)),
+                                ),
                               ),
                             ],
                           ),

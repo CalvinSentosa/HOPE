@@ -80,8 +80,10 @@ class ProfilePage2 extends StatelessWidget {
     }
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      backgroundColor: const Color(0xFFF7F4F2),
       appBar: AppBar(
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.transparent,
         elevation: 0,
         leading: Padding(
           padding:
@@ -116,7 +118,10 @@ class ProfilePage2 extends StatelessWidget {
                   child: Container(
                     height: 250,
                     decoration: BoxDecoration(
-                      color: Colors.green,
+                      image: DecorationImage(
+                        image: AssetImage('assets/background_profil.jpg'),
+                        fit: BoxFit.cover,
+                        )
                     ),
                   ),
                 ),

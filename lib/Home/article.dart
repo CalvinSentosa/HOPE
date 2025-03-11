@@ -38,6 +38,7 @@ class ArticlePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFF7F4F2),
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(CupertinoIcons.arrow_left, color: Colors.black),
@@ -45,8 +46,14 @@ class ArticlePage extends StatelessWidget {
             Navigator.pop(context, MaterialPageRoute(builder: (context) => HomePage(key: homePageKey,)));
           }
         ),
-        title: const Text('Mindful Articles'),
-        backgroundColor: Colors.teal,
+          title: const Text(
+          'Mindful Articles',
+          style: TextStyle(
+            color: Color(0xFF4F3422),
+            fontWeight: FontWeight.bold, // Membuat teks menjadi tebal (bold)
+          ),
+        ),
+        backgroundColor: Colors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -55,7 +62,7 @@ class ArticlePage extends StatelessWidget {
           children: [
             const Text(
               'Featured Articles',
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 22),
             ),
             const SizedBox(height: 16),
             Expanded(

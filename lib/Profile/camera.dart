@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:flutter/cupertino.dart';
 
 class CameraApp extends StatefulWidget {
   @override
@@ -53,6 +54,13 @@ class _CameraAppState extends State<CameraApp> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Camera Preview'),
+        leading: IconButton(
+          icon: const Icon(CupertinoIcons.arrow_left,
+                  color: Colors.black, size: 20),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: _isCameraInitialized
           ? CameraPreview(_cameraController) // Display the live camera feed
@@ -72,7 +80,7 @@ class _CameraAppState extends State<CameraApp> {
             }
           }
         },
-        child: const Icon(Icons.camera),
+        child: const Icon(CupertinoIcons.camera),
       ),
     );
   }
