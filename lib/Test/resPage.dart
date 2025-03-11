@@ -1,13 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_android_studio/Home/home_page.dart';
+import 'package:project_android_studio/Services/provider.dart';
 import 'package:project_android_studio/main.dart';
+import 'package:provider/provider.dart';
 
 class DepressionResultPage extends StatelessWidget {
-  final List<int?> weeklyScores;
-
-  DepressionResultPage({required this.weeklyScores});
-
   // Method to determine depression category and background color based on score
   Map<String, dynamic> getDepressionDetails(int score) {
     if (score <= 25) {
@@ -23,8 +21,9 @@ class DepressionResultPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final depressionScore = weeklyScores.last ?? 0; // Default to 0 if null
-    final depressionDetails = getDepressionDetails(depressionScore);
+    final userProvider = Provider.of<UserProvider>(context);
+    final userData = userProvider.userData;
+    final depressionDetails = getDepressionDetails(userData?['depressionScore']);
     final backgroundColor = depressionDetails['color'] as Color;
     final depressionCategory = depressionDetails['category'] as String;
 
@@ -39,11 +38,13 @@ class DepressionResultPage extends StatelessWidget {
           icon: Icon(CupertinoIcons.arrow_left, color: Colors.white),
           onPressed: () {
             Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => HomePage(
-                          key: homePageKey,
-                        )));
+              context,
+              MaterialPageRoute(
+                builder: (context) => HomePage(
+                  key: homePageKey,
+                ),
+              ),
+            );
           },
         ),
         title: Text('Depression Score', style: TextStyle(color: Colors.white)),
@@ -123,7 +124,7 @@ class DepressionResultPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        depressionScore.toString(),
+                        userData?['depressionScore'],
                         style: TextStyle(
                           fontSize: 64,
                           color: Colors.white,
@@ -139,7 +140,6 @@ class DepressionResultPage extends StatelessWidget {
                   ),
                 ),
               ),
-
               // Bar plot section
               Expanded(
                 flex: 2,
@@ -165,50 +165,59 @@ class DepressionResultPage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 24.0, vertical: 16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: List.generate(7, (index) {
-                          final score = index < weeklyScores.length
-                              ? weeklyScores[index]
-                              : null;
-                          final barColor = score != null
-                              ? getDepressionDetails(score)['color'] as Color
-                              : Colors.grey;
-                          final barHeight = score != null
-                              ? ((score / 100) * maxHeight)
-                                  .clamp(0.0, maxHeight)
-                              : 10.0;
+                      child: FutureBuilder(
+                        future: userProvider.getDepressionScores(), // Get depression scores from database
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState == ConnectionState.waiting) {
+                            return CircularProgressIndicator(); // Show loading indicator
+                          } else if (snapshot.hasError) {
+                            return Text('Error: ${snapshot.error}'); // Error handling
+                          } else if (!snapshot.hasData || snapshot.hasData) {
+                            return Center(child: Text('No data available'));
+                          } else {
+                            final depressionScores = snapshot.data as List<Map<String, dynamic>>;
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: List.generate(7, (index) {
+                                final scoreData = index < depressionScores.length
+                                    ? depressionScores[index]
+                                    : null;
+                                final score = scoreData != null ? scoreData['score'] : null;
+                                final date = scoreData != null ? scoreData['date'] : null;
+                                final barColor = score != null
+                                    ? getDepressionDetails(score)['color'] as Color
+                                    : Colors.grey;
+                                final barHeight = score != null
+                                    ? ((score / 100) * maxHeight).clamp(0.0, maxHeight)
+                                    : 10.0;
 
-                          return Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Container(
-                                width: 45,
-                                height: barHeight,
-                                decoration: BoxDecoration(
-                                  color: barColor,
-                                  borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(30),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 8),
-                              Text(
-                                [
-                                  "Mon",
-                                  "Tue",
-                                  "Wed",
-                                  "Thu",
-                                  "Fri",
-                                  "Sat",
-                                  "Sun"
-                                ][index],
-                                style: TextStyle(color: Colors.black),
-                              ),
-                            ],
-                          );
-                        }),
+                                return Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Container(
+                                      width: 45,
+                                      height: barHeight,
+                                      decoration: BoxDecoration(
+                                        color: barColor,
+                                        borderRadius: BorderRadius.vertical(
+                                          top: Radius.circular(30),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 8),
+                                    Text(
+                                      date != null
+                                          ? DateTime.parse(date).day.toString()
+                                          : '', // Show date of the depression test
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                  ],
+                                );
+                              }),
+                            );
+                          }
+                        },
                       ),
                     ),
                   ],

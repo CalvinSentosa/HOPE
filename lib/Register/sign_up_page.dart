@@ -146,9 +146,8 @@ class SignUpPage extends StatelessWidget {
                 decoration: InputDecoration(
                   labelText: "Password",
                   hintText: "Enter your password...",
-                  prefixIcon: Icon(Icons.lock),
-                  suffixIcon: Icon(Icons
-                      .visibility_off), // Tambahkan logika toggle jika diperlukan
+                  prefixIcon: Icon(CupertinoIcons.lock),
+                  suffixIcon: Icon(CupertinoIcons.eye_slash), // Tambahkan logika toggle jika diperlukan
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
@@ -173,9 +172,8 @@ class SignUpPage extends StatelessWidget {
                 decoration: InputDecoration(
                   labelText: "Password Confirmation",
                   hintText: "Confirm your password...",
-                  prefixIcon: Icon(Icons.lock),
-                  suffixIcon: Icon(Icons
-                      .visibility_off), // Tambahkan logika toggle jika diperlukan
+                  prefixIcon: Icon(CupertinoIcons.lock),
+                  suffixIcon: Icon(CupertinoIcons.eye_slash), // Tambahkan logika toggle jika diperlukan
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),

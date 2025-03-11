@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'dart:async';
@@ -64,7 +65,19 @@ class _HeartBPMDetectorState extends State<HeartBPMDetector> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Heart BPM Detector')),
+      backgroundColor: const Color(0xFFF7F4F2),
+      appBar: AppBar(
+        backgroundColor: const Color(0xFFF7F4F2),
+        // leading: IconButton(onPressed: (){
+        //   Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(key: homePageKey,)));
+        // }, icon: Icon(CupertinoIcons.arrow_left)),
+        title: const Text(
+          'Heart BPM Detector',
+          style: TextStyle(
+            color: Color(0xFF4F3422),
+            fontWeight: FontWeight.bold, // Membuat teks menjadi tebal (bold)
+          ),
+        )),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

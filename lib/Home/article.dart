@@ -1,7 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_android_studio/Articles/artmed.dart';
 import 'package:project_android_studio/Articles/artmusic.dart';
 import 'package:project_android_studio/Articles/thankful.dart';
+import 'package:project_android_studio/Home/home_page.dart';
+import 'package:project_android_studio/main.dart';
 
 class ArticlePage extends StatelessWidget {
   final List<Map<String, dynamic>> articles = [
@@ -35,9 +38,22 @@ class ArticlePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFF7F4F2),
       appBar: AppBar(
-        title: const Text('Mindful Articles'),
-        backgroundColor: Colors.teal,
+        leading: IconButton(
+          icon: Icon(CupertinoIcons.arrow_left, color: Colors.black),
+          onPressed: () {
+            Navigator.pop(context, MaterialPageRoute(builder: (context) => HomePage(key: homePageKey,)));
+          }
+        ),
+          title: const Text(
+          'Mindful Articles',
+          style: TextStyle(
+            color: Color(0xFF4F3422),
+            fontWeight: FontWeight.bold, // Membuat teks menjadi tebal (bold)
+          ),
+        ),
+        backgroundColor: Colors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -46,7 +62,7 @@ class ArticlePage extends StatelessWidget {
           children: [
             const Text(
               'Featured Articles',
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 22),
             ),
             const SizedBox(height: 16),
             Expanded(
