@@ -147,7 +147,7 @@ class Dashboard extends StatelessWidget {
                                       left: 12, right: 12, top: 5),
                                   // padding: EdgeInsets.all(10),
                                   decoration: BoxDecoration(
-                                      color: Color(0xFFD3DDBC),
+                                      color: Color(0xFF9BB167),
                                       borderRadius: BorderRadius.circular(20)),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,

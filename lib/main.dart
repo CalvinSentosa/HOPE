@@ -28,8 +28,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(useMaterial3: true),
       // home: LandingPage1(),
-      // home: HomePage(key: homePageKey),
-      home: DepressionResultPage(),
+      home: HomePage(key: homePageKey),
+      // home: DepressionResultPage(),
 
     );
   }
