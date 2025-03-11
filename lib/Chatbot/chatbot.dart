@@ -1,82 +1,59 @@
-import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
+import 'dart:convert';
 import 'package:dash_chat_2/dash_chat_2.dart';
+import 'package:project_android_studio/Services/globals.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
-import 'consts.dart';
-
-class ChatPage extends StatefulWidget{
+class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
+
   @override
   State<ChatPage> createState() => _ChatPageState();
 }
 
-class _ChatPageState extends State<ChatPage>{
+class _ChatPageState extends State<ChatPage> {
+  final ChatUser _currentUser = ChatUser(id: '1', firstName: 'You');
+  final ChatUser _gptUser = ChatUser(id: '2', firstName: 'GPT');
+  List<ChatMessage> _messages = [];
 
-  final _openAI = OpenAI.instance.build(
-    token: OPENAI_API_KEY, 
-    baseOption: HttpSetup(
-      receiveTimeout: const Duration(
-        seconds: 5,
-      ),
-    ),
-    enableLog: true,
-  );
+  Future<void> sendMessage(ChatMessage message) async {
+    setState(() {
+      _messages.insert(0, message);
+    });
 
-  final ChatUser _currentUser = ChatUser(id:'1', firstName: 'Calvin', lastName: 'Sentosa');
-  final ChatUser _gptChatUser = ChatUser(id:'2', firstName: 'Chat', lastName: 'GPT');
+    final response = await http.post(
+      Uri.parse(baseURL + '/chat'), // Change to your Laravel API URL
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'message': message.text}),
+    );
 
-  List<ChatMessage> _messages = <ChatMessage>[];
-  List<ChatUser> _typingUsers = <ChatUser>[];
+    if (response.statusCode == 200) {
+      final reply = jsonDecode(response.body);
+      setState(() {
+        _messages.insert(
+          0,
+          ChatMessage(user: _gptUser, createdAt: DateTime.now(), text: reply),
+        );
+      });
+    } else {
+      setState(() {
+        _messages.insert(
+          0,
+          ChatMessage(user: _gptUser, createdAt: DateTime.now(), text: "Error: Unable to get response"),
+        );
+      });
+    }
+  }
 
   @override
-  Widget build (BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(0, 126, 126, 1),
-        title: const Text(
-          'Hiro Chatbot',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-      ),
+      appBar: AppBar(title: const Text("Chat with GPT")),
       body: DashChat(
-        currentUser: _currentUser, 
-        typingUsers: _typingUsers,
-        messageOptions: const MessageOptions(
-          currentUserContainerColor: Colors.black,
-          containerColor: Color.fromRGBO(0, 166,126, 1),
-          textColor: Colors.white,
-        ),
-        onSend: (ChatMessage m){
-          getChatResponse(m);
-        }, 
-        messages: _messages),
+        currentUser: _currentUser,
+        onSend: sendMessage,
+        messages: _messages,
+      ),
     );
-  }
-  Future<void> getChatResponse(ChatMessage m)async{
-    setState((){
-      _messages.insert(0, m);
-      _typingUsers.add(_gptChatUser);
-    });
-    List <Messages> _messagesHistory = _messages.reversed.map((m){
-      if (m.user == _currentUser){
-        return Messages(role:Role.user, content:m.text);
-      }else{
-        return Messages(role: Role.assistant, content: m.text);
-      }
-    }).toList();
-    final request = ChatCompleteText(model: Gpt4ChatModel(), messages: _messagesHistory, maxToken: 200,);
-    final response = await _openAI.onChatCompletion(request: request);
-    for (var element in response!.choices){
-      if (element.message != null){
-        setState(() {
-          _messages.insert(0, ChatMessage(user: _gptChatUser, createdAt: DateTime.now(), text: element.message!.content));
-        });
-      }
-    }
-    setState(() {
-      _typingUsers.remove(_gptChatUser);
-    });
   }
 }
