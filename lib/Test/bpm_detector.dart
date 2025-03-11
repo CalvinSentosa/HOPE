@@ -1,10 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-import 'package:project_android_studio/Home/home_page.dart';
 import 'dart:async';
 import 'package:project_android_studio/Test/questionPage.dart';
-import 'package:project_android_studio/main.dart';
 
 class HeartBPMDetector extends StatefulWidget {
   final Function(int) onBPMDetected;

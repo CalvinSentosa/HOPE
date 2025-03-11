@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_android_studio/Home/home_page.dart';
 // import 'package:project_android_studio/Register/landing_pages.dart';
 import 'package:project_android_studio/Services/provider.dart';
-import 'package:project_android_studio/Test/resPage.dart';
+// import 'package:project_android_studio/Test/resPage.dart';
 import 'package:provider/provider.dart';
 // import 'Register/landing_pages.dart';
 
