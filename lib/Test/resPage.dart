@@ -25,7 +25,6 @@ class DepressionResultPage extends StatelessWidget {
     final userData = userProvider.userData;
     print("Score: ${userData?['depression_score']}");
     print("Score: ${userData}");
-    // final int? score = userData?['depression_score'];
     final depressionDetails = getDepressionDetails(userData?['depression_score']);
     final backgroundColor = depressionDetails['color'] as Color;
 

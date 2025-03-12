@@ -29,8 +29,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(useMaterial3: true),
-      // home: LandingPage1(),
-      home: HomePage(key: homePageKey),
+      home: LandingPage1(),
+      // home: HomePage(key: homePageKey),
       // home: DepressionResultPage(),
 
     );
