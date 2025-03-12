@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:project_android_studio/Home/article.dart';
 import 'package:project_android_studio/Home/home_page.dart';
+import 'package:project_android_studio/Meditation/meditation.dart';
 import 'package:project_android_studio/Profile/profilepage.dart';
 import 'package:project_android_studio/Services/provider.dart';
 import 'package:project_android_studio/Test/bpm_detector.dart';
@@ -61,9 +62,9 @@ class Dashboard extends StatelessWidget {
                                 margin: EdgeInsets.only(right: 10),
                                 child: GestureDetector(
                                   onTap: () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) => ProfilePage());
+                                   Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => ProfilePage()));
                                   },
                                   child: const CircleAvatar(
                                     radius: 40,
@@ -147,8 +148,17 @@ class Dashboard extends StatelessWidget {
                                       left: 12, right: 12, top: 5),
                                   // padding: EdgeInsets.all(10),
                                   decoration: BoxDecoration(
-                                      color: Color(0xFF9BB167),
-                                      borderRadius: BorderRadius.circular(20)),
+                                    color: Color(0xFF9BB167),
+                                    borderRadius: BorderRadius.circular(20),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.5), // Warna bayangan dengan transparansi
+                                        spreadRadius: 2, // Seberapa jauh bayangan menyebar
+                                        blurRadius: 6, // Seberapa blur bayangannya
+                                        offset: Offset(-1, 3), // Posisi bayangan (X, Y)
+                                      ),
+                                    ],
+                                  ),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -239,12 +249,19 @@ class Dashboard extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
+                                GestureDetector(
+                                  onTap: () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => MeditationVideoPage())),
+                                  child: 
                                 ActivityCard(
                                   title: 'Daily Meditation',
                                   icon: Icon(
                                     FontAwesome.leaf,
                                     color: Colors.green,
                                   ),
+                                ),
                                 ),
                                 ActivityCard(
                                   title: 'Gratefulness Journaling',
@@ -307,7 +324,7 @@ class Dashboard extends StatelessWidget {
                                 },
                                 child: Text(
                                   'See All',
-                                  style: TextStyle(color: Color(0xFF4F3422)),
+                                  style: TextStyle(color: Color(0xFFED7E1C)),
                                 ),
                               ),
                             ],
@@ -345,16 +362,34 @@ class Dashboard extends StatelessWidget {
                                       fit: BoxFit.cover,
                                     ),
                                   ),
-                                  const Padding(
-                                    padding: EdgeInsets.all(16.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                            'Healing Minds: Exploring the Path'),
-                                        Icon(CupertinoIcons.arrow_right),
-                                      ],
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white, // Warna latar putih
+                                      borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(16.0), // Ubah sesuai kebutuhan
+                                        bottomRight: Radius.circular(16.0), 
+                                      ),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(16.0),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'Healing Minds: Exploring the Path',
+                                            style: TextStyle(
+                                              color: Color(0xFF4F3422),
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16.0,
+                                            ),
+                                          ),
+                                          Icon(
+                                            CupertinoIcons.arrow_right_circle_fill,
+                                            color: Color(0xFFED7E1C),
+                                            size: 24.0,
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   )
                                 ],

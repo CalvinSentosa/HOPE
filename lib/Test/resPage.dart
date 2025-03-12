@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_android_studio/Home/home_page.dart';
 import 'package:project_android_studio/Services/provider.dart';
-import 'package:project_android_studio/main.dart';
 import 'package:provider/provider.dart';
 
 class DepressionResultPage extends StatelessWidget {
@@ -23,15 +22,14 @@ class DepressionResultPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     final userData = userProvider.userData;
-    print("Score: ${userData?['depression_score']}");
-    print("Score: ${userData}");
-    final depressionDetails = getDepressionDetails(userData?['depression_score']);
-    final backgroundColor = depressionDetails['color'] as Color;
+    final int score = userData?['depression_score'] ?? 0;
+    final depressionDetails = getDepressionDetails(score);
+    final Color backgroundColor = depressionDetails['color'] as Color;
 
     const double maxHeight = 180.0;
 
     return Scaffold(
-      backgroundColor: backgroundColor, // Fix backgroundColor reference
+      backgroundColor: backgroundColor,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -41,9 +39,7 @@ class DepressionResultPage extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => HomePage(
-                  key: homePageKey,
-                ),
+                builder: (context) => HomePage(),
               ),
             );
           },
@@ -51,7 +47,7 @@ class DepressionResultPage extends StatelessWidget {
         title: Text('Depression Score', style: TextStyle(color: Colors.white)),
       ),
       body: Stack(
-        clipBehavior: Clip.none, // Allow decoration to overflow
+        clipBehavior: Clip.none,
         children: [
           // Background decorations
           Positioned(
@@ -78,46 +74,8 @@ class DepressionResultPage extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
-            top: 50,
-            left: 20,
-            child: Container(
-              width: 180,
-              height: 180,
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.3),
-                shape: BoxShape.circle,
-              ),
-            ),
-          ),
-          Positioned(
-            top: 200,
-            left: 50,
-            child: Container(
-              width: 80,
-              height: 80,
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.3),
-                shape: BoxShape.circle,
-              ),
-            ),
-          ),
-          Positioned(
-            top: 280,
-            left: 250,
-            child: Container(
-              width: 120,
-              height: 120,
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.3),
-                shape: BoxShape.circle,
-              ),
-            ),
-          ),
-          // Main content
           Column(
             children: [
-              // Top section with depression score and category
               Expanded(
                 flex: 3,
                 child: Center(
@@ -125,7 +83,7 @@ class DepressionResultPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        userData?['depressionScore'],
+                        score.toString(),
                         style: TextStyle(
                           fontSize: 64,
                           color: Colors.white,
@@ -134,19 +92,18 @@ class DepressionResultPage extends StatelessWidget {
                       ),
                       SizedBox(height: 8),
                       Text(
-                        'You have ${getDepressionDetails(userData?['depressionScore'] ?? 0)['category']}',
+                        'You have ${depressionDetails['category']}',
                         style: TextStyle(fontSize: 24, color: Colors.white),
                       ),
                     ],
                   ),
                 ),
               ),
-              // Bar plot section
               Expanded(
                 flex: 2,
                 child: Stack(
                   alignment: Alignment.bottomCenter,
-                  clipBehavior: Clip.none, // Ensure no clipping
+                  clipBehavior: Clip.none,
                   children: [
                     Positioned(
                       bottom: 0,
@@ -166,57 +123,80 @@ class DepressionResultPage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 24.0, vertical: 16.0),
-                      child: FutureBuilder(
-                        future: userProvider.getDepressionScores(), // Get depression scores from database
+                      child: FutureBuilder<List>(
+                        future: userProvider.getDepressionScores(),
                         builder: (context, snapshot) {
                           if (snapshot.connectionState == ConnectionState.waiting) {
-                            return CircularProgressIndicator(); // Show loading indicator
+                            return Center(child: CircularProgressIndicator());
                           } else if (snapshot.hasError) {
-                            return Text('Error: ${snapshot.error}'); // Error handling
-                          } else if (!snapshot.hasData || snapshot.hasData) {
-                            return Center(child: Text('No data available'));
-                          } else {
-                            final depressionScores = snapshot.data as List<Map<String, dynamic>>;
-                            final recentScores = depressionScores.take(7).toList(); // Take 7 days of scores
-                            return Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: List.generate(7, (index) {
-                                final scoreData = recentScores[index];
-                                final score = scoreData['score'];
-                                final date = scoreData['date'];
-                                final barColor = score != null
-                                    ? getDepressionDetails(score)['color'] as Color
-                                    : Colors.grey;
-                                final barHeight = score != null
-                                    ? ((score / 100) * maxHeight).clamp(0.0, maxHeight)
-                                    : 10.0;
+                            return Center(child: Text('Error: ${snapshot.error}'));
+                          }
 
-                                return Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Container(
-                                      width: 45,
-                                      height: barHeight,
-                                      decoration: BoxDecoration(
-                                        color: barColor,
-                                        borderRadius: BorderRadius.vertical(
-                                          top: Radius.circular(30),
-                                        ),
+                          final List<Map<String, dynamic>> depressionScores =
+                              (snapshot.data ?? []).cast<Map<String, dynamic>>();
+
+                          // Ensure recentScores has at least 7 elements
+                          List<Map<String, dynamic>> recentScores = [];
+                          DateTime today = DateTime.now();
+
+                          for (int i = 0; i < 7; i++) {
+                            DateTime targetDate = today.subtract(Duration(days: i));
+                            String targetDateStr = targetDate.toIso8601String().substring(0, 10);
+
+                            // Check if there is a score for this date
+                            var scoreData = depressionScores.firstWhere(
+                              (element) => element['date'] != null && element['date'].startsWith(targetDateStr),
+                              orElse: () => {'score': null, 'date': targetDateStr},
+                            );
+
+                            // If the score for the current date is null, replace it with the score obtained earlier
+                            if (scoreData['score'] == null && targetDateStr == today.toIso8601String().substring(0, 10)) {
+                              scoreData['score'] = score;
+                            }
+
+                            recentScores.insert(0, scoreData);
+                          }
+
+                          // Debug print to check recentScores
+                          print('Recent Scores: $recentScores');
+
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: List.generate(7, (index) {
+                              final scoreData = recentScores[index];
+                              final score = scoreData['score'];
+                              final date = scoreData['date'];
+
+                              final barColor = score != null
+                                  ? getDepressionDetails(score)['color'] as Color
+                                  : Colors.grey;
+                              final barHeight = score != null
+                                  ? ((score / 100) * maxHeight).clamp(0.0, maxHeight)
+                                  : 10.0;
+
+                              return Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Container(
+                                    width: 45,
+                                    height: barHeight,
+                                    decoration: BoxDecoration(
+                                      color: barColor,
+                                      borderRadius: BorderRadius.vertical(
+                                        top: Radius.circular(30),
                                       ),
                                     ),
-                                    SizedBox(height: 8),
-                                    Text(
-                                      date != null
-                                          ? DateTime.parse(date).day.toString()
-                                          : '', // Show date of the depression test
-                                      style: TextStyle(color: Colors.black),
-                                    ),
-                                  ],
-                                );
-                              }),
-                            );
-                          }
+                                  ),
+                                  SizedBox(height: 8),
+                                  Text(
+                                    date.substring(8, 10), // Display the day
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                ],
+                              );
+                            }),
+                          );
                         },
                       ),
                     ),
@@ -230,21 +210,3 @@ class DepressionResultPage extends StatelessWidget {
     );
   }
 }
-
-// perbaiki kesalahan berikut
-
-// Undefined name 'backgroundColor'.
-// Try correcting the name to one that is defined, or defining the name.dartundefined_identifier
-// Type: InvalidType
-
-
-// The getter 'depressionScore' isn't defined for the type 'Map<String, dynamic>'.
-// Try importing the library that defines 'depressionScore', correcting the name to the name of an existing getter, or defining a getter or field named 'depressionScore'.dartundefined_getter
-// Type: InvalidType
-
-
-// The property 'isEmpty' can't be unconditionally accessed because the receiver can be 'null'.
-// Try making the access conditional (using '?.') or adding a null check to the target ('!').dartunchecked_use_of_nullable_value
-// Type: InvalidType
-
-

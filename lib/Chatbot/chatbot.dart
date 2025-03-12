@@ -55,7 +55,7 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // Warna kolom chat putih
+      backgroundColor: const Color(0xFFF7F4F2), // Warna kolom chat putih
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,

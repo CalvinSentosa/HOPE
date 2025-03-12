@@ -48,12 +48,12 @@ class HomePageState extends State<HomePage> {
         key: _bottomNavigationKey,
         index: 0,
         items: const [
-          Icon(CupertinoIcons.home),
-          Icon(CupertinoIcons.chat_bubble_text_fill),
-          Icon(CupertinoIcons.square_list_fill)
+          Icon(CupertinoIcons.home, color: Color(0xFF4F3422)),
+          Icon(CupertinoIcons.chat_bubble_text_fill, color: Color(0xFF4F3422)),
+          Icon(CupertinoIcons.square_list_fill, color: Color(0xFF4F3422)),
         ],
         color: Colors.white,
-        buttonBackgroundColor: Colors.white,
+        buttonBackgroundColor: Color(0xFFF7F4F2),
         backgroundColor: Color(0xFF9BB167),
         animationCurve: Curves.easeInOut,
         animationDuration: const Duration(milliseconds: 600),
