@@ -30,9 +30,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(useMaterial3: true),
-      // home: LandingPage1(),
-      // home: HomePage(key: homePageKey),
-      home:DepressionResultPage(weeklyScores: [10, 20, 30, 40, 50, 60, 70]) ,
+      home: LandingPage1(),
+      //home: HomePage(key: homePageKey),
+      // home: DepressionResultPage(),
 
     );
   }
