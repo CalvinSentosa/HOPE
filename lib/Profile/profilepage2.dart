@@ -2,8 +2,6 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
-import 'package:project_android_studio/Profile/camera.dart';
 import 'package:project_android_studio/Profile/profilepage.dart';
 import 'package:project_android_studio/Services/auth_services.dart';
 
@@ -46,7 +44,7 @@ class ProfilePage2 extends StatelessWidget {
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     final userData = userProvider.userData;
-    // print("Hasil userData: ${userData}");
+    print("Hasil userData: ${userData}");
     updateData() async {
       String fullName = _fullNameController.text;
 
@@ -154,7 +152,8 @@ class ProfilePage2 extends StatelessWidget {
                         ),
                         child: CircleAvatar(
                           radius: 50,
-                          backgroundColor: Colors.blue,
+                          backgroundImage: AssetImage(
+                                        'assets/user_profile.png'),
                         ),
                       ),
                       Positioned(

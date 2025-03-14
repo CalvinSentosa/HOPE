@@ -49,7 +49,7 @@ class HomePageState extends State<HomePage> {
         index: 0,
         items: const [
           Icon(CupertinoIcons.home),
-          Icon(CupertinoIcons.rocket),
+          Icon(CupertinoIcons.chat_bubble_text_fill),
           Icon(CupertinoIcons.square_list_fill)
         ],
         color: Colors.white,

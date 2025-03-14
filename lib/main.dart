@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:project_android_studio/Home/home_page.dart';
 import 'package:project_android_studio/Register/landing_pages.dart';
 import 'package:project_android_studio/Services/provider.dart';
-import 'package:project_android_studio/Test/resPage.dart';
+import 'package:project_android_studio/Test/resPageLAMA.dart';
+// import 'package:project_android_studio/Test/resPage.dart';
 // import 'package:project_android_studio/Test/resPage.dart';
 import 'package:provider/provider.dart';
 // import 'Register/landing_pages.dart';
@@ -22,14 +23,16 @@ void main() {
 final GlobalKey<HomePageState> homePageKey = GlobalKey();
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(useMaterial3: true),
-      home: LandingPage1(),
+      // home: LandingPage1(),
       // home: HomePage(key: homePageKey),
-      // home: DepressionResultPage(),
+      home:DepressionResultPage(weeklyScores: [10, 20, 30, 40, 50, 60, 70]) ,
 
     );
   }
