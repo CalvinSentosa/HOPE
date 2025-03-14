@@ -90,6 +90,7 @@ class MusicArticles extends StatelessWidget {
     );
   }
 
+  // ignore: unused_element
   Widget _quote(String text) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -112,6 +113,7 @@ class MusicArticles extends StatelessWidget {
     );
   }
 
+  // ignore: unused_element
   Widget _tip(String text) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
