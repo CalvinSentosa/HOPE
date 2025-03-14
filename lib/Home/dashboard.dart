@@ -19,6 +19,7 @@ class Dashboard extends StatelessWidget {
     final userProvider = Provider.of<UserProvider>(context);
     userProvider.loadUserData();
     final userData = userProvider.userData;
+    print(userData);
     return MaterialApp(
       home: Scaffold(
         // appBar: AppBar(
@@ -97,14 +98,14 @@ class Dashboard extends StatelessWidget {
                                         SizedBox(width: 10),
                                         Expanded(
                                           child: LinearProgressIndicator(
-                                            value: 0.4 * 2, // 80% progress
+                                            value: ((userData?['depression_score'] ?? 0)/30), // 80% progress
                                             backgroundColor: Colors.white24,
                                             color: Colors.greenAccent,
                                           ),
                                         ),
                                         SizedBox(width: 10),
                                         Text(
-                                          '80%',
+                                          '${(((userData?['depression_score'] ?? 0)/30)*100).toInt()}%',
                                           style: TextStyle(color: Colors.white),
                                         ),
                                       ],

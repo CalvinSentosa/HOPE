@@ -26,8 +26,8 @@ class _QuestionPageState extends State<QuestionPage> {
 
   int DepressionScore(List<double> answers) {
     // Konversi nilai slider ke skor PHQ-9
-    int totalScore = val.fold(0, (sum, vals) => sum + (vals.toInt() - 1));
-
+    int totalScore = val.fold(0, (sum, value) => sum + (value.toInt()));
+    
     // Menentukan kategori depresi berdasarkan skor
     return totalScore;
   }
@@ -42,7 +42,7 @@ class _QuestionPageState extends State<QuestionPage> {
   double _currentValue8 = 0;
   double _currentValue9 = 0;
   double _currentValue10 = 0; // Nilai default slider
-  List<double> val = List.filled(11, 1); // Menyimpan jawaban user
+  List<double> val = List.filled(11,1); // Menyimpan jawaban user
 
   void updateScore(int index, double value) {
     setState(() {
