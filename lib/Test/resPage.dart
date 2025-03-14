@@ -51,8 +51,8 @@ class DepressionResultPage extends StatelessWidget {
         children: [
           // Background decorations
           Positioned(
-            top: 250,
-            right: 50,
+            top: 200,
+            right: 45,
             child: Container(
               width: 60,
               height: 60,
@@ -68,6 +68,42 @@ class DepressionResultPage extends StatelessWidget {
             child: Container(
               width: 270,
               height: 270,
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.3),
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
+          Positioned(
+            top: 50,
+            left: 30,
+            child: Container(
+              width: 160,
+              height: 160,
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.3),
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 150,
+            right: 40,
+            child: Container(
+              width: 250,
+              height: 250,
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.3),
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 400,
+            left: 50,
+            child: Container(
+              width: 110,
+              height: 110,
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.3),
                 shape: BoxShape.circle,
@@ -90,10 +126,24 @@ class DepressionResultPage extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 8),
-                      Text(
-                        'You have ${depressionDetails['category']}',
-                        style: TextStyle(fontSize: 24, color: Colors.white),
+                      // SizedBox(height: 2),
+                      // Text(
+                      //   'You have ${depressionDetails['category']}',
+                      //   style: TextStyle(fontSize: 24, color: Colors.white, fontWeight: FontWeight.bold),
+                      // ),
+                      Text.rich(
+                        TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'You have ',
+                            style: TextStyle(fontSize: 24, color: Colors.white),
+                          ),
+                          TextSpan(
+                            text: '${depressionDetails['category']}',
+                            style: TextStyle(fontSize: 24, color: Colors.white, fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                        ),
                       ),
                     ],
                   ),
