@@ -8,9 +8,9 @@ class DepressionResultPage extends StatelessWidget {
   // Method to determine depression category and background color based on score
   Map<String, dynamic> getDepressionDetails(int score) {
     if (score <= 4) {
-    return {'category': 'No Depression', 'color': Color(0xFF7FA760)};
+    return {'category': 'No Depression', 'color': Color(0xFF30AB40)};
     } else if (score <= 9) {
-      return {'category': 'Mild Depression', 'color': Color(0xFF9BB168)};
+      return {'category': 'Mild Depression', 'color': Color(0xFF51CE54)};
     } else if (score <= 14) {
       return {'category': 'Moderate Depression', 'color': Color(0xFFFFCE5C)};
     } else if (score <= 19) {
@@ -228,7 +228,7 @@ class DepressionResultPage extends StatelessWidget {
                                   ? getDepressionDetails(score)['color'] as Color
                                   : Colors.grey;
                               final barHeight = score != null
-                                  ? ((score / 100) * maxHeight).clamp(0.0, maxHeight)
+                                  ? ((score / 30) * maxHeight).clamp(0.0, maxHeight)
                                   : 10.0;
 
                               return Column(

@@ -286,7 +286,7 @@ class MoodCard extends StatelessWidget {
 
         int? score = scoreData['score'];
         Color barColor = score != null ? getDepressionDetails(score)['color'] as Color : Colors.grey;
-        double fillHeight = score != null ? ((score / 100) * 100).clamp(0.0, 100) : 0.0;
+        double fillHeight = score != null ? ((score / 30) * 100).clamp(0.0, 100) : 0.0;
 
         recentScores.insert(0, {
           'tanggal': targetDate.day.toString(), // Date number as label
@@ -328,12 +328,14 @@ class MoodCard extends StatelessWidget {
   }
   
   Map<String, dynamic> getDepressionDetails(int score) {
-    if (score <= 7.5) {
-      return {'category': 'No Depression', 'color': Color(0xFF9BB167)};
-    } else if (score <= 15) {
-      return {'category': 'Mild Depression', 'color': Color(0xFFFFCE5C)};
-    } else if (score <= 22.5) {
-      return {'category': 'Moderate Depression', 'color': Color(0xFFED7E1C)};
+    if (score <= 4) {
+    return {'category': 'No Depression', 'color': Color(0xFF30AB40)};
+    } else if (score <= 9) {
+      return {'category': 'Mild Depression', 'color': Color(0xFF51CE54)};
+    } else if (score <= 14) {
+      return {'category': 'Moderate Depression', 'color': Color(0xFFFFCE5C)};
+    } else if (score <= 19) {
+      return {'category': 'Moderate Severe Depression', 'color': Color(0xFFED7E1C)};
     } else {
       return {'category': 'Severe Depression', 'color': Color(0xFFAF2727)};
     }

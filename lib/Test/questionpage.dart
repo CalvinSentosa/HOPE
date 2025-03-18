@@ -339,18 +339,6 @@ class _QuestionPageState extends State<QuestionPage> {
                     color: Color(0xFF4F3422)), // Menambahkan warna teks
               ),
               Text(
-                // "Several days",
-                "2",
-                style: TextStyle(
-                    color: Color(0xFF4F3422)), // Menambahkan warna teks
-              ),
-              Text(
-                // "More than half the days",
-                "3",
-                style: TextStyle(
-                    color: Color(0xFF4F3422)), // Menambahkan warna teks
-              ),
-              Text(
                 "Nearly every day",
                 // "4",
                 style: TextStyle(
