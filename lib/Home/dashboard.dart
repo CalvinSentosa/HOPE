@@ -17,7 +17,7 @@ class Dashboard extends StatelessWidget {
     // bool _isSubmitted = true;
     final GlobalKey<HomePageState> homePageKey = GlobalKey<HomePageState>();
     final userProvider = Provider.of<UserProvider>(context);
-    userProvider.loadUserData();
+    //userProvider.loadUserData();
     final userData = userProvider.userData;
     print(userData);
     return MaterialApp(

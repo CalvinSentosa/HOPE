@@ -7,11 +7,11 @@ import 'package:provider/provider.dart';
 class DepressionResultPage extends StatelessWidget {
   // Method to determine depression category and background color based on score
   Map<String, dynamic> getDepressionDetails(int score) {
-    if (score <= 25) {
+    if (score <= 7.5) {
       return {'category': 'No Depression', 'color': Color(0xFF9BB167)};
-    } else if (score <= 50) {
+    } else if (score <= 15) {
       return {'category': 'Mild Depression', 'color': Color(0xFFFFCE5C)};
-    } else if (score <= 75) {
+    } else if (score <= 22.5) {
       return {'category': 'Moderate Depression', 'color': Color(0xFFED7E1C)};
     } else {
       return {'category': 'Severe Depression', 'color': Color(0xFFAF2727)};
@@ -22,6 +22,8 @@ class DepressionResultPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     final userData = userProvider.userData;
+    final userResult = userProvider.getDepressionScores();
+    print('User Result: $userResult');
     final int score = userData?['depression_score'] ?? 0;
     final depressionDetails = getDepressionDetails(score);
     final Color backgroundColor = depressionDetails['color'] as Color;
@@ -192,6 +194,7 @@ class DepressionResultPage extends StatelessWidget {
                           for (int i = 0; i < 7; i++) {
                             DateTime targetDate = today.subtract(Duration(days: i));
                             String targetDateStr = targetDate.toIso8601String().substring(0, 10);
+                            print(targetDateStr);
 
                             // Check if there is a score for this date
                             var scoreData = depressionScores.firstWhere(
@@ -208,6 +211,7 @@ class DepressionResultPage extends StatelessWidget {
                           }
 
                           // Debug print to check recentScores
+                          print('Raw API Data: $depressionScores');
                           print('Recent Scores: $recentScores');
 
                           return Row(
