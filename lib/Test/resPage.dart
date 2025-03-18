@@ -7,12 +7,14 @@ import 'package:provider/provider.dart';
 class DepressionResultPage extends StatelessWidget {
   // Method to determine depression category and background color based on score
   Map<String, dynamic> getDepressionDetails(int score) {
-    if (score <= 7.5) {
-      return {'category': 'No Depression', 'color': Color(0xFF9BB167)};
-    } else if (score <= 15) {
+    if (score <= 4) {
+      return {'category': 'No Depression', 'color': Color(0xFF7FA760)};
+    } else if (score <= 9) {
       return {'category': 'Mild Depression', 'color': Color(0xFFFFCE5C)};
-    } else if (score <= 22.5) {
-      return {'category': 'Moderate Depression', 'color': Color(0xFFED7E1C)};
+    } else if (score <= 14) {
+      return {'category': 'Moderate Depression', 'color': Color(0xFFFFCE5C)};
+    } else if (score <= 19) {
+      return {'category': 'Moderate Severe Depression', 'color': Color(0xFFED7E1C)};
     } else {
       return {'category': 'Severe Depression', 'color': Color(0xFFAF2727)};
     }
